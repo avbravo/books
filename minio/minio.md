@@ -163,6 +163,19 @@ Podemos darle Shared para compartir el Objeto por un tiempo estipulado
 ![](resources/shared.png)
 
 De esta manera podemos administrar los buckets y Objetos
+
+* Agregar tag a archivos
+
+De clic sobre el archivo deseado
+
+![](resources/tag_0.png)
+
+De clic en el menu contextual en la opción Tags
+
+Ingrese la etiqueta y el valor y presion el botón Save
+
+![](resources/tag_1ó.png)
+
 ---
 
 
