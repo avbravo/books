@@ -49,7 +49,6 @@ Este repositorio cuenta con libros e investigaciones
 # Temas
 | Tema | Descripción |
 | --- | ----------- |
-| [Doctorado](doctorado/doctorado.md)|Doctorado |
 | [Self-contained Systems (SCS)](self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
 | [Object Storage](objectstorage/objectstorage.md)| Oject storage |
 | [Idempotency](idempotency.md) | What is idempotency?- An operation that produces the same output regardless of the number of times it’s executed, with the same input. This Ensures data consistency and prevents duplicate operations.|
@@ -61,9 +60,7 @@ Este repositorio cuenta con libros e investigaciones
 | [Blogs](blogs/blogs.md) | Blogs |
 | [Hadoop](hadoop/hadoop.md) | Hadoop |
 | [Minio](minio.md)| Minio |
-| [DataFlow](dataflow.md)| DataFlow |
 | [Load Balancer](loadbalanced/loadbalancer.md) | Load Balancer|
-| [DataScience](datascience.md)| DataScience |
 | [Embedding](embedding.md) | Embedding|
 | [FileSystems](filesystems.md) | File Systems|
 | [Serializaciom](serialization/serializacion.md)| Apache Fury, FlatBuffers is a cross platform serialization library architected for maximum memory efficiency. It allows you to directly access serialized data without parsing/unpacking it first, while still having great forwards/backwards compatibility.|
@@ -71,7 +68,6 @@ Este repositorio cuenta con libros e investigaciones
 | [DataBases](datatabase/databases.md) | Comparar ArcadeDB con EclipseStore |
 | [DataLake](datalake/datalake.md)| DataLake (lago de datos) alto rendimiento repositorios, Ver el proyecto Project Nessie  (base de datos estilo GIT). Concepto para crear una base de datos|
 | [Docker](docker/docker.md) | Docker|
-| [Doctorado](doctorado.md)| Doctorado|
 | [Microservicios](microservices.md) | Microservicios y Arquitecturas, Idempotency | 
 | [Event Driven Architecture](event-driven-architecture.md)| Building reliable business processes using API-driven microservices is a common goal for modern applications|
 | [Jmoordbcore](jmoordbcore.md)| JmoordbCore Framework Java para NoSQL |
@@ -90,6 +86,12 @@ Este repositorio cuenta con libros e investigaciones
 | [Testing](testing/testing.md)| Testing|
 | [Postman](postman/postman.md)| Postman|
 | [Podman](podman/podman.md)| Podman|
+
+# Doctorado
+| Tema | Descripción |
+| [Dataflow](dataflow/dataflow.md)|Dataflow |
+| [DataScience](datascience/datascience.md)| DataScience |
+| [Doctorado](doctorado/doctorado.md)|Doctorado |
 
 # Java
 | Tema | Descripción |
