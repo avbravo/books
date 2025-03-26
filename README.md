@@ -53,7 +53,6 @@ Este repositorio cuenta con libros e investigaciones
 | [Self-contained Systems (SCS)](self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
 | [Object Storage](objectstorage/objectstorage.md)| Oject storage |
 | [Idempotency](idempotency.md) | What is idempotency?- An operation that produces the same output regardless of the number of times it’s executed, with the same input. This Ensures data consistency and prevents duplicate operations.|
-| [ClientesRest](clientesrest.md)| Clientes Rest |
 | [ia](ia/ia.md)| IA , LANGCHAIN|
 | [ML](ml.md)| ML|
 | [Apache](apache.md) | Proyectos de la fundación Apache, BigData,alto rendimiento|
@@ -107,7 +106,7 @@ Este repositorio cuenta con libros e investigaciones
 | [Graalvm](java/graalvm/graalvm.md) |GraalVM | 
 | [JMS](java/jms/jms.md) | JMS con Payara |
 | [Payara Micro](java/payara/payaramicro.md) | Payara Micro |
-
+| [TornadoVM](java/tornadovm/tornadovm.md) | TornadoVM |
 ## Arquitecturas
 
 | Tema | Descripción |
@@ -116,13 +115,12 @@ Este repositorio cuenta con libros e investigaciones
 | [Amazon](arquitectura/amazon/amazon.md)| Amazon |
 | [Bloom](arquitectura/bloom/bloom.md)| Bloom |
 | [BlueSky](arquitectura/bluesky/bluesky.md)| BlueSky|
-| [Google](arquitectura/google.md) | Google |
-| [NetFlix](arquitectura/netflix.md) | NetFlix |
+| [Google](arquitectura/google/google.md) | Google |
+| [NetFlix](arquitectura/netflix/netflix.md) | NetFlix |
 | [Pinterest](arquitectura/pinterest/pinterest.md)| Pinterest|
 | [Twitter](arquitectura/twitter/twitter.md) | Twitter|
 | [Uber](arquitectura/uber/uber.md)| Uber |
-| [Whatsapp](arquitectura/whatsapp.md)| Whatsapp|
-
+| [Whatsapp](arquitectura/whatsapp/whatsapp.md)| Whatsapp|
 
 
 
