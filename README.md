@@ -49,7 +49,7 @@ Este repositorio cuenta con libros e investigaciones
 # Temas
 | Tema | Descripción |
 | --- | ----------- |
-|[doctorado](doctorado/doctorado.md)|Doctorado |
+|[Doctorado](doctorado/doctorado.md)|Doctorado |
 |[Self-contained Systems (SCS)](self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
 |[Clientes Rest](clientesrest.md)| Clientes Rest |
 |[Object Storage](objectstorage/objectstorage.md)| Oject storage |
