@@ -28,7 +28,7 @@ Este repositorio cuenta con libros e investigaciones
 
 
 # Proyecto de Doctorado
-[doctorado](doctorado/doctorado.md)
+
 * Apache Fury con Apache Arrrow para almacenamiento
 * Una base de datos que implemente LSM con Weka tal vez Apache Fury con Serializacion
 * Apache Pulsar
@@ -49,6 +49,7 @@ Este repositorio cuenta con libros e investigaciones
 # Temas
 | Tema | Descripción |
 | --- | ----------- |
+|[doctorado](doctorado/doctorado.md)|Doctorado |
 |[Self-contained Systems (SCS)](self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
 |[Clientes Rest](clientesrest.md)| Clientes Rest |
 |[Object Storage](objectstorage/objectstorage.md)| Oject storage |
