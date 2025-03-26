@@ -1,3 +1,21 @@
+## Apache Wicket
+Crear un proyecto desde
+
+[https://wicket.apache.org/start/quickstart.html](https://wicket.apache.org/start/quickstart.html)
+
+Ejecutarlo mediante
+
+```shell
+
+ mvn jetty:run
+
+```
+
+Ingresar a
+```
+http://localhost:8080/
+```
+
 Entendido. Si no deseas usar Jetty como servidor HTTP, podemos utilizar un enfoque alternativo para ejecutar una aplicación Java con Apache Wicket utilizando únicamente el **servidor HTTP integrado de Java** (a través del paquete `com.sun.net.httpserver.HttpServer`), que está disponible desde Java 6 en adelante.
 
 A continuación, te muestro cómo configurar y ejecutar una aplicación Java con Apache Wicket sin depender de Jetty ni otros servidores externos.

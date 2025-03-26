@@ -44,20 +44,25 @@ Este repositorio cuenta con libros e investigaciones
 * [Apache Hudi 1.0 and the Next Generation of Data Lakehouses](https://hudi.apache.org/)
 ---
 
+# Apache
+| Tema | Descripción |
+| --- | ----------- |
+| [Apache](apache.md) | Proyectos de la fundación Apache, BigData,alto rendimiento|
+| [Apache Flink](apache/apacheflink/apacheflink.md)| Apache Flink |
+| [Apache Fury](apache/apachefury/apachefury.md)| Apache Fury |
+| [Apache Wicket](apache/apachewicket/apachewicket.md)| Apache Wicket |
+
 
 
 # Temas
 | Tema | Descripción |
 | --- | ----------- |
-| [Self-contained Systems (SCS)](self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
-| [Apache](apache.md) | Proyectos de la fundación Apache, BigData,alto rendimiento|
 | [Architecture Decision Records](architecturedecisionrecords.md)|Architecture Decision Records |
 | [Books](books/books.md) | Books|
 | [Blogs](blogs/blogs.md) | Blogs |
 | [Hadoop](hadoop/hadoop.md) | Hadoop |
 | [Minio](minio.md)| Minio |
 | [Load Balancer](loadbalanced/loadbalancer.md) | Load Balancer|
-| [Serializaciom](serialization/serializacion.md)| Apache Fury, FlatBuffers is a cross platform serialization library architected for maximum memory efficiency. It allows you to directly access serialized data without parsing/unpacking it first, while still having great forwards/backwards compatibility.|
 | [Docker](docker/docker.md) | Docker|
 | [Microservices](microservices/microservices.md) | Microservices y Arquitecturas, Idempotency | 
 | [Jmoordbcore](jmoordbcore.md)| JmoordbCore Framework Java para NoSQL |
@@ -68,7 +73,6 @@ Este repositorio cuenta con libros e investigaciones
 | [Utp](utp.md)| Utp|
 | [MVC](mvc.md)| MVC |
 | [Git](git/git.md)| GIT |
-| [Apache Wicket](mvc.md)| Apache Wicket |
 | [Reserve Proxy](reserveproxy.md) | Reserve Proxy |
 | [Kubernetes](kubernetes/kubernetes.md) | Kubernetes |
 | [Iconos](iconos/iconos.md) | Iconos|
@@ -97,8 +101,11 @@ Este repositorio cuenta con libros e investigaciones
 | [Lsm](lsm/lsm.md) |LSM|
 | [ML](ml/ml.md)| ML|
 | [Object Storage](objectstorage/objectstorage.md)| Oject storage |
+| [Reverseproxy](reverseproxy/reverseproxy.md)| Reverseproxy |
+| [Semanticversion](semanticversion/semanticversion.md)| Semanticversion |
+| [Self-contained Systems (SCS)](self-containedsystems(SCS)/self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
 | [StreamData](streamdata/streamdata.md) | StreamData Ejemplo de una aplicación que consulta cada cambio en una base de datos Postgresql |
-| [Serialization](serialization/serialization.md) |Serialization|
+| [Serialization](serialization/serialization.md) |Apache Fury, FlatBuffers is a cross platform serialization library architected for maximum memory efficiency. It allows you to directly access serialized data without parsing/unpacking it first, while still having great forwards/backwards compatibility.|
 
 
 # Java
@@ -132,6 +139,7 @@ Este repositorio cuenta con libros e investigaciones
 | [Google](arquitectura/google/google.md) | Google |
 | [NetFlix](arquitectura/netflix/netflix.md) | NetFlix |
 | [Pinterest](arquitectura/pinterest/pinterest.md)| Pinterest|
+| [Shopify](arquitectura/shopify/shopify.md)| Shopify|
 | [Twitter](arquitectura/twitter/twitter.md) | Twitter|
 | [Uber](arquitectura/uber/uber.md)| Uber |
 | [Whatsapp](arquitectura/whatsapp/whatsapp.md)| Whatsapp|
