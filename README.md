@@ -78,6 +78,7 @@ Este repositorio cuenta con libros e investigaciones
 | [Podman](podman/podman.md)| Podman|
 
 # Doctorado
+
 | Tema | Descripción |
 | [DataBases](datatabase/databases.md) | Comparar ArcadeDB con EclipseStore |
 | [Dataflow](dataflow/dataflow.md)|Dataflow |
@@ -100,6 +101,7 @@ Este repositorio cuenta con libros e investigaciones
 
 
 # Java
+
 | Tema | Descripción |
 | [Java](java/java.md)| Java, Lambda Stream/ Vector API |
 | [Clientes Rest](java/clientesrest/clientesrest.md)| Clientes Rest |
