@@ -102,7 +102,7 @@ Este repositorio cuenta con libros e investigaciones
 | [Decodable](decodable.md) | Decodable |
 | [ Kubernetes](kubernetes.md) | Kubernetes |
 | [Iconos](iconos.md) | Iconos|
-| [Testing](testing.md)| Testing|
+| [Testing](testing/testing.md)| Testing|
 | [Postman](postman.md)| Postman|
 
 ## Arquitecturas
@@ -114,7 +114,7 @@ Este repositorio cuenta con libros e investigaciones
 | [Uber](uber.md)| Uber |
 | [Google](google.md) | Google |
 | [NetFlix](netflix.md) | NetFlix |
-| [Twitter](twitter.md) | Twitter|
+| [Twitter](twitter/twitter.md) | Twitter|
 | [Whatsapp](whatsapp.md)| Whatsapp|
 | [BlueSky](bluesky.md)| BlueSky|
 
