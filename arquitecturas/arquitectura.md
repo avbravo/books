@@ -3,13 +3,12 @@
 
 | Tema | Descripción |
 | --- | ----------- |
-| [Arquitectura](arquitectura/arquitectura.md)| Arquitectura |
-| [Amazon](arquitectura/amazon/amazon.md)| Amazon |
-| [Bloom](arquitectura/bloom/bloom.md)| Bloom |
-| [BlueSky](arquitectura/bluesky/bluesky.md)| BlueSky|
-| [Google](arquitectura/google.md) | Google |
-| [NetFlix](arquitectura/netflix.md) | NetFlix |
-| [Pinterest](arquitectura/pinterest/pinterest.md)| Pinterest|
-| [Twitter](arquitectura/twitter/twitter.md) | Twitter|
-| [Uber](arquitectura/uber/uber.md)| Uber |
-| [Whatsapp](arquitectura/whatsapp.md)| Whatsapp|
+| [Amazon](amazon/amazon.md)| Amazon |
+| [Bloom](bloom/bloom.md)| Bloom |
+| [BlueSky](bluesky/bluesky.md)| BlueSky|
+| [Google](google/google.md) | Google |
+| [NetFlix](/netflix/netflix.md) | NetFlix |
+| [Pinterest](pinterest/pinterest.md)| Pinterest|
+| [Twitter](twitter/twitter.md) | Twitter|
+| [Uber](uber/uber.md)| Uber |
+| [Whatsapp](whatsapp/whatsapp.md)| Whatsapp|
