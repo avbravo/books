@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jmoordb-Core</title>
+        <meta charset="utf-8">
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+            @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+            @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+            body {
+                font-family: 'Droid Serif';
+            }
+            h1, h2, h3 {
+                font-family: 'Yanone Kaffeesatz';
+                font-weight: normal;
+            }
+            .remark-code, .remark-inline-code {
+                font-family: 'Ubuntu Mono';
+            }
+        </style>
+    </head>
+    <body>
+        <textarea id="source">
+
+class: center, middle
+
+# Jmoordb-core framework
+
+## Generación de código con Java Annotation Processing.
+
+![](images/avbravo.png)
+### Aristides Villarreal Bravo
+
+|NetBeans Dream Teams   | Duke Choice Awards | Java Champions |
+|-----------       | -----------    |-----------      |
+|Jug.Leader| Autor Libros  |Revisor Técnico                |
+
+    
+---
+
+# Agenda
+
+1. [Introduction](#introduccion)
+2. [Java Reflection](#reflection)
+2. [Java Annotation](#annotation)
+3. [Java Annotation Proccessing](#annotatioprocessing)
+4. [Jmoordb-core](#jmoordbcore)
+
+---
+name: introduccion
+# Introduction
+
+
+---
+name: reflection
+# Java Reflection
+![](images/vampire.png)
+
+
+---
+
+# ¿Qué es Java Reflection?
+
+Java Reflection es un API que permite analizar en tiempo de ejecución medatados de las clases 
+e interactuar sobre ellas.
+```java
+public Optional<T> findById(T t2) {
+Document doc = new Document();
+try {
+    for (PrimaryKey p : primaryKeyList) {
+        String name = "get" + util.letterToUpper(p.getName());
+        Method method = entityClass.getDeclaredMethod(name);
+        doc.put(p.getName(), method.invoke(t2));
+        return find(doc);            
+    }
+} catch (Exception e) {  }
+  return Optional.empty();
+}
+
+```
+Ejemplo:
+```java
+Optional<Persona> personaOptional = personaRepsitory.findById(persona);
+Optional<Auto> auto = autoRepository.findById(auto);
+```
+???
+Java Reflection permite instanciar clases, leer sus metadatos y ejecutar mètodos
+en tiempo de ejecución. En el ejemplo que utilizo, es de mi antiguo framework 
+jmoord, el cual usaba genericos y reflextion. Se puede observar que se obtiene 
+los nombres de las llaves primariss luego se crea el metodo getNombre() y
+ese valor se va asignando a un documento de MongoDB y se hace la invocación 
+y este valor devuelto se asigna al documnento que ejecutara una consulta a la
+base de datos por la llave primaria.
+**Optional** es un objeto contenedor que puede almacenar un  valor no nulo.
+**Genericos**:Fue introducido en Java 5,  permite un tipo seguro de manejo de objetos de diversos tipos. E
+# Desventajas:
+**Velocidad**: Llamadas son más lentos que usar llamadas directas.
+**Tipos Seguros**: Métodos que usan referenciados pueden ser invocados con parametros incorrectos
+**Trazabilidad**: Si el método invocado falla puede ser dificil realizar trazabilidad.
+
+---
+name: annotation
+# Java Annotation
+
+![](images/java_annotation.png)
+
+Las anotaciones nos ofrecen una serie de metadatos sobre el programa en sí mismo. 
+ 
+```java
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.SOURCE)
+public @interface Mensaje { }
+
+public class UsuarioController {
+    @Mensaje
+    public void saludo(){}
+}
+```
+
+???
+No causan efectos sobre el programa
+ofrecen informacion que puede ser procesada en tiempo de compilacion o ejecucion
+En el ejemplo creamos una anotacion llamada mensaje y la implmentamos en un método
+esta anotación puede ser procesada en tiempo de compilación o ejecución
+
+---
+name: annotatioprocessing
+# Java Annotation Processing
+![](images/duke_annotaion_processor.png)
+Un procesador de anotaciones, procesa las anotaciones en tiempo de complicación 
+o ejecución ofreciendo funcionalidades como generación de código, verificación de errores.
+```java
+@SupportedAnnotationTypes({"com.jmoordb.core.annotation.repository.Mensaje"})
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
+public class MensajeProcessor extends AbstractProcessor { }
+```
+Código generado
+```java
+public class UsuarioController {
+    public void saludo(){
+    System.out,println(" Bienvenido a Java "+ new Date());
+    }
+}
+```
+???
+El procesador de anotaciones se puede observar que indicamos el paquete donde definimos
+la anotacion, indicamos la version de Java que va a sopotar como minimo y extendemos
+AbstractProcessr, con esta clasae podemos obtener informacio de todos los metodos
+que implementan esta anotacion y las clases donde estan ubicados, podemos obtener
+informacion de los parametros, del nombre del metodo y de los valores de retorno
+con esta informacion podemos validar lo que esta escrito enviar advert3ncias y generar
+codigo.
+
+---
+name: jmoordbcore
+
+# Jmoordb-core
+* Es un framework Java para bases de datos NoSQL, orientado a Jakarta EE y Microprofile.
+* Construido mediante Java Annotation Proccesing.
+
+## ¿Por qué crear un framework nuevo?
+   La mejor respuesta la encontramos en el control sobre la evolución del mismo 
+y en la experiencia de aprendizaje que podemos alcanzar.
+
+
+Ejemplo de anotaciones
+de como funciona
+editar en el IDE
+crear una entidad
+crear un repositorio
+compilar codigo
+quarkus
+
+
+
+
+1- Decir que las interfaces las inyectamos en los controller , y se abstrae la implementación, ya que la implementacion del codigo
+ser realizara en otra clase. Por lo tanto es un codigo más entendible.
+2- Decir que jmnoordb-core se basa en leer anotaciones y generar el codigo de una interface mediante Java Annotation Process
+3- Decir que se procesa la antoacion @Entity que creara supplier y explicarlos comparandolos con Lookup de nmongodb
+4- Decir que esta orientado a mongoDB
+5- Deicr que se procesa la anotaicon @Repository para generar codigo
+6- Decir las ventajas y limitaciones de jmoordb aspectos releventes uso de @Referenceds
+7- Mostrar todas las anotaciones
+6 - Crear una Interface y una implementacion de ejemplo.  
+8- Mostrar un proyecto ccrar entidad embebvida otra referenciada repository y compilar el rpopeycto mostar el codigo que se crea
+9- mostrar el libro
+10 cuandom nse crea Repository mostrar cono se valida en tiempo de edicion el coidugo y que cumpla la sintacis
+11- Mostrar la sintaxis las tablas
+12- Mostrar un servicio rest corriendo
+13- decir que se estra trabajando en el framework de anotaciones
+14- crear slide con markdown
+
+??? 
+Construido en base a jmoordb
+---
+# Libros
+
+
+---
+# Pronunciacion y preguntas
+Reflection
+**Optional** es un objeto contenedor que puede almacenar un  valor no nulo.
+**Genericos**:Fue introducido en Java 5,  permite un tipo seguro de manejo de objetos de diversos tipos. E
+
+
+
+
+        </textarea>
+        <!--<script src="https://remarkjs.com/downloads/remark-latest.min.js">-->
+        <script src="remark-latest.min.js">
+        </script>
+        <script>
+            var slideshow = remark.create();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+# Pendientes
+- [] Aplicar metricas jmeter
+- [] Crear aplicacion con Helidon y medir rendimiento
+- [] Crear aplicacion con OpenLiberty y medir rendimiento
+- [] Crear imagenes nativas
+- [] Aprender nginx
+- [] Crear imagenes docker
+- [] Mejorar inteface
+- [] Tesis
+- [] Quarkus
+- 

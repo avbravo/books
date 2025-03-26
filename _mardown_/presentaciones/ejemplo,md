@@ -1,0 +1,55 @@
+
+Ejemplo Oficial
+[Ejemplo](https://remarkjs.com/#1)
+[view-source](view-source:https://remarkjs.com/#8)
+
+
+codigo izquierda y derecha
+---
+
+.left-column[
+  ## Jmoordb-core
+
+]
+.right-column[
+* Es un framework Java para bases de datos NoSQL
+* Orientado a Java Cloud Native
+* Pensado para trabajar con Microservicios.
+* Soporta las especificaciones Jakarta EE y Microprofile.
+* Es fácil de utilizar
+* Construido mediante Java Annotation Proccesing.
+* Genera advertencias sobre la escritura de métodos
+* Tiene su propio lenguaje de consulta Jmoordb-core query Language
+* Soporta inferencia sobre nombre de métodos.
+* Genera el código Java Nativo
+.pull-left[
+
+<pre><code>```java
+@Entity
+public class Pais{
+    @Id
+    private String idpais;
+    @Column
+    private String pais;
+    @Embedded
+    private Oceano oceano;
+    @Referenced(from = "idioma",localField = "idioma.ididioma",
+    typeReferenced = TypeReferenced.EMBEDDED)
+    private Idioma idioma;
+}
+```</code></pre>
+]
+.pull-right[
+
+<pre><code>```java
+@RequestScoped
+public class PaisSupplier implements Serializable {
+}
+```</code></pre>
+]
+
+A number of highlighting [styles](https://github.com/gnab/remark/wiki/Configuration#highlighting) are available, including several well-known themes from different editors and IDEs.
+
+]
+
+---

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+    body {
+      background-color: #673AB7;
+      color: white;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      margin-bottom: .5em;
+      margin-top: .5em;
+      padding: 1em;
+      border: 1px solid white;
+      transition-property: background-color, color;
+      transition-duration: 500ms;
+      transition-timing-function: ease-in-out;
+    }
+    li:hover {
+      background-color: white;
+      color: black;
+    }
+  </style>
+    </head>
+    <body>
+        <div id="app">
+            {{ message }}
+        </div>
+<!--        <script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hola Vue!'
+    }
+})
+        </script>-->
+
+<script>
+    new Vue({
+  el: '#app',
+  data () {
+    return {
+      info: null
+    }
+  },
+  mounted () {
+    axios
+      .get('http://localhost:8080/persona')
+      .then(response => (this.info = response))
+  }
+})
+</script>
+b
+<div id="app">
+  {{ info }}
+</div>
+
+    </body>
+</html>

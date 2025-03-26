@@ -1,0 +1,9 @@
+
+    project.build.sourceDirectory
+    project.build.scriptSourceDirectory
+    project.build.testSourceDirectory
+    project.build.outputDirectory
+    project.build.testOutputDirectory
+    project.build.directory
+
+uppose your project is called project-A, and under project-A, a pom.xml is declared, then ${project.build.sourceDirectory} points to project-A/src/main/java, ${project.build.scriptSourceDirectory} points to project-A/src/main/scripts, ${project.build.testSourceDirectory} points to project-A/src/test/java, ${project.build.directory} points to project-A/target, ${project.build.directory} points to project-A/target/classes, ${project.build.testOutputDirectory} points to project-A/target/test-

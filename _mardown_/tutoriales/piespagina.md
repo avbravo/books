@@ -1,0 +1,13 @@
+# Pies de pagina
+Este libro es el trabajo realizado a lo largo de los años desde mi blog[^1], donde escribo temas sobre Java, JavaEE, Jakarta EE, NoSQL, NetBeans IDE.
+
+<i lang="en">temas</i>, MongoDB, jmoordb
+[^1]: Disponible en <https://avbravo.blogspot.com>.
+
+## codigo
+```json
+Este libro es el trabajo realizado a lo largo de los años desde mi blog[^1], donde escribo temas sobre Java, JavaEE, Jakarta EE, NoSQL, NetBeans IDE.
+
+<i lang="en">temas</i>, MongoDB, jmoordb
+[^1]: Disponible en <https://avbravo.blogspot.com>.
+```

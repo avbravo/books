@@ -1,0 +1,16 @@
+crea una carpeta llamada manuscript
+
+manuscript \images
+           \Book.txt
+           \capitulo_01.md
+
+Agregue a Book.txt los nombres de archivo que seran incluidos en el libro
+en el orden que desee que aparezcan.
+
+Coloque cada linea hasta el final y de un especio entre lineas
+
+si desea un tabulador use > texto
+
+las imagenes deben ser colocadas en el directorio images
+
+solo utilice markdown

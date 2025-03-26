@@ -1,0 +1,90 @@
+
+## jmoordbgeneredorjsf
+
+Tomar como guia estos proyectos que genera codigo html, se puede hacer que genere .xhmtl
+
+[jmoordbaudit](https://github.com/avbravo/jmoordbaudit/blob/master/README.md)
+
+ Proyecto de ejemplo
+
+[audit](https://github.com/avbravo/audit)
+
+```java
+public String panelDataTable() {
+//        try {
+////           unitTest.message("Testeando save()");
+////Mock
+//            Color color = new Color();
+//            color.setActivo("si");
+//            color.setAutoincrementable(15);
+//            color.setIdcolor("rojo");
+//            List<UserInfo> list = new ArrayList<>();
+//            color.setUserInfo(list);
+//            Boolean expResult = true;
+//            Boolean save = unitTest.assertEquals("panelDataTable", true, colorRepository.save(color));
+//
+//            /*
+//            Dibuja la interfaz
+//             */
+//           unitTest.form();
+//           unitTest.formTitle("panelDataTable()");
+//           unitTest.panel();
+//
+//           unitTest.panelAddInputText(Arrays.asList(new InputText("idcolor", color.getIdcolor()),
+//                    new InputText("activo", color.getActivo())));
+//
+//            //-----------------------------
+//            List<Color> colorList = colorRepository.findAll();
+//            List<Item> itemList = new ArrayList<>();
+//            for (Color c : colorList) {
+//                Item item = new Item(c.getIdcolor(), c.getIdcolor(), c.getIdcolor());
+//                itemList.add(item);
+//            }
+//           unitTest.panelAddSelectOneMenu(
+//                    Arrays.asList(new SelectOneMenu("color", itemList)));
+//
+//            //------------------
+//           unitTest.panelAddTableHeader("colores", Arrays.asList(new RowView("idcolor"), new RowView("activo")));
+//            colorRepository.findAll().forEach((c) -> {
+//               unitTest.panelAddTableCol(Arrays.asList(new ColView(c.getIdcolor()), new ColView(c.getActivo())));
+//            });
+//           unitTest.panelAddTableClose();
+//
+//           unitTest.panelClose();
+//           unitTest.buttonGreen("Save");
+//           unitTest.formClose();
+//            if (save) {
+//               unitTest.message("se guardo exitosamente");
+//            } else {
+//               unitTest.errorMessage("No se pudo guardar");
+//            }
+//
+//        } catch (Exception e) {
+//            System.out.println("save() " + e.getLocalizedMessage());
+//        }
+//
+//        return "";
+//    }
+
+```
+
+
+
+[How to generate xhtml files in webapp using javac annotation processor](https://stackoverflow.com/questions/52525655/how-to-generate-xhtml-files-in-webapp-using-javac-annotation-processor)
+
+
+```java
+
+
+
+ FileObject f = processingEnv.getFiler().createResource(StandardLocation.SOURCE_OUTPUT, "", "DUMMY");
+  Path p = Paths.get(f.toUri())
+          .getParent()  // {PROJECT_ROOT}/target/generated-sources/annotations
+          .getParent()  // {PROJECT_ROOT}/target/generated-sources
+          .getParent()  // {PROJECT_ROOT}/target
+          .getParent(); // {PROJECT_ROOT}
+  FileWriter fw = new FileWriter(new File(p.toFile(), "src/main/webapp/generated.xhtml"));
+  fw.append("some content...");
+  fw.close();)
+
+```

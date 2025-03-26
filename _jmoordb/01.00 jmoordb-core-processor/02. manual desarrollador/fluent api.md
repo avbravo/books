@@ -1,0 +1,6 @@
+# Fluent API
+# Fluent APi
+[Comparing Builder Pattern and Fluent Interface](http://www.javabyexamples.com/builder-vs-fluent-interface)
+```java
+SqlQuery.from("Game").select({"name"}).orderBy("price")
+```

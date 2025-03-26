@@ -1,0 +1,5 @@
+# Pendiente
+
+- [] Seguridad
+- [] Crud
+

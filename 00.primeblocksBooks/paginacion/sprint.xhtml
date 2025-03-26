@@ -1,0 +1,248 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:jmoordbcorejsf="http://xmlns.jcp.org/jsf/composite/jmoordbcorejsf"
+                xmlns:dashboard="http://xmlns.jcp.org/jsf/composite/dashboard"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <ui:define name="title">#{conf['application.title']}</ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>
+            <div class="chevron">/</div>
+            <h:link outcome="/home">#{core['breadcrumb.home']}</h:link>
+        </li>
+        <li>
+            <div class="chevron">/</div>
+            <h:link outcome="/scrum/dashboard">#{core['breadcrumb.dashboard']}</h:link>
+        </li>
+        <li>
+            <div class="chevron">/</div>
+            <h:link outcome="/scrum/sprint">#{core['breadcrumb.sprint']}</h:link>
+        </li>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form" prependId="false"  rendered="#{p:ifAnyGranted('COLABORADOR,COORDINADOR-FACULTAD, DEVELOPERS,DIRECTOR,JEFE-UNIDAD,SUBDIRECTOR-ADMINISTRATIVO, SUBDIRECTOR-INVESTIGACION, SUBDIRECTOR-VIDA-UNIVERSITARIA')}">
+            <p:growl id="growl"/>
+
+            <div class="block-category-title">#{core['form.sprint']}</div>
+
+            <!--<pb:blockViewerCore header="Sidebar" >-->
+            <div class="min-h-screen flex relative lg:static surface-ground">
+                <div id="app-sidebar"
+                     class="surface-section h-full lg:h-auto hidden lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none"
+                     style="width:280px">
+                    <div class="flex flex-column h-full">
+                        <div class="flex align-items-center px-5 flex-shrink-0" style="height:60px">
+                            <p:graphicImage name="images/blocks/logos/hyper-700.svg" library="primeblocks-app"
+                                            alt="Image" height="30"/>
+
+
+                        </div>
+                        <dashboard:leftmenu/>
+
+
+
+                        <dashboard:footer/>
+                    </div>
+                </div>
+                <div class="min-h-screen flex flex-column relative flex-auto">
+                    <dashboard:top/>
+
+                    <div class="surface-section">
+                        <div class="grid">
+                            <div class="col-12 lg:col-2">
+                                <div class="text-900 font-medium text-xl mb-3">#{core['form.sprint']}</div>
+                                <!--<p class="m-0 p-0 text-600 line-height-3 mr-3">Odio euismod lacinia at quis risus sed vulputate odio.</p>-->
+                            </div>
+                            <div class="col-12 lg:col-10">
+                                <div class="grid formgrid ui-fluid">
+                                    <div class="field mb-4 col-12">
+                                        <label for="proyecto" class="font-medium">#{msg['field.proyecto']}</label>
+                                        <p:inputText id="proyecto" value="#{sprintFaces.proyectoSelected.proyecto}"
+                                                     disabled="true"  />
+                                    </div>
+                                    <div class="field mb-4 col-12">
+                                        <label for="prefijo" class="font-medium">#{msg['field.prefijo']}</label>
+                                        <p:inputText id="prefijo" value="#{sprintFaces.proyectoSelected.prefijo}"
+                                                     disabled="true"/>
+                                    </div>
+                                    <div class="field mb-4 col-6">
+                                        <label  class="font-medium">#{msg['field.fechainicial']}</label>
+                                        <p:inputText  value="#{sprintFaces.showDate(sprintFaces.proyectoSelected.fechainicial)}"
+                                                      disabled="true"/>
+                                    </div>
+                                    <div class="field mb-4 col-6">
+                                        <label  class="font-medium">#{msg['field.fechafinal']}</label>
+
+                                        <p:inputText value="#{sprintFaces.showDate(sprintFaces.proyectoSelected.fechafinal)}"
+                                                     disabled="true"/>
+
+                                    </div>
+
+
+                                    <c:if test="${sprintFaces.haveOpenSprint()==false}">
+
+
+                                        <div class="field mb-4 col-12"   >
+                                            <label for="sprint" class="font-medium">#{msg['field.sprint']}</label>
+                                            <p:inputText value="#{sprintFaces.sprintSelected.sprint}" id="sprint"
+                                                         disabled="true"
+
+                                                         />
+                                        </div>
+
+                                        <div class="field mb-4 col-12" >
+                                            <label for="descripcion" class="font-medium">#{msg['field.descripcion']}</label>
+                                            <p:inputTextarea id="descripcion" value="#{sprintFaces.sprintSelected.descripcion}" rows="5" autoResize="true"/>
+                                        </div>
+                                        <div class="field mb-4 col-12 md:col-6"   >
+                                            <label for="fechainicial" class="font-medium text-900">#{msg['field.fechainicial']}</label>
+                                            <p:calendar id="fechainicial" value="#{sprintFaces.sprintSelected.fechainicial}" showOn="button"
+                                                        mindate="#{sprintFaces.proyectoSelected.fechainicial}"
+                                                        maxdate="#{sprintFaces.proyectoSelected.fechafinal}"/>
+                                        </div>
+                                        <div class="field mb-4 col-12 md:col-6"  >
+                                            <label for="fechafinal" class="font-medium text-900">#{msg['field.fechafinal']}</label>
+                                            <p:calendar id="fechafinal" value="#{sprintFaces.sprintSelected.fechafinal}" showOn="button"
+                                                         mindate="#{sprintFaces.proyectoSelected.fechainicial}"
+                                                        maxdate="#{sprintFaces.proyectoSelected.fechafinal}"
+                                                        />
+                                        </div>
+                                    </c:if>
+                                  
+                                   <c:if test="${sprintFaces.haveOpenSprint()}">
+                                        <div  class="flex align-items-start p-4 bg-yellow-100 border-round border-1 border-yellow-300">
+                                            <i class="pi pi-exclamation-circle text-yellow-900 text-2xl mr-3"/>
+                                            <div class="mr-3">
+                                                <div class="text-purple-900 font-medium text-xl mb-2 line-height-1">#{core['warning.warning']}</div>
+                                                <p class="m-0 p-0 text-yellow-700 mb-3 line-height-3">
+                                                    #{core['warning.tienesprintabiertosnosepuedencrearnuevoshastacerrarlos']}
+                                                </p>
+                                                <!--                                <a class="font-medium text-yellow-900 mr-4 no-underline cursor-pointer">Accept</a>
+                                                                                <a class="font-medium text-yellow-900 no-underline cursor-pointer">Decline</a>-->
+                                            </div>
+                                            <div class="ml-auto">
+                                                <a class="inline-flex align-items-center justify-content-center ml-auto border-circle hover:bg-yellow-50 no-underline cursor-pointer transition-colors transition-duration-150"
+                                                   style="width:1.5rem;height:1.5rem">
+                                                    <i class="pi pi-times text-yellow-900"/>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </c:if>
+  <div class="col-4">
+                                        <p:commandButton id="commandButtonView"  icon="pi pi-eye"  title="#{core['button.view']}" 
+                                                         value="#{core['button.view']}" 
+                                                         styleClass="w-auto mt-3 ui-button-help"/>
+
+                                    </div>
+
+                                    <div class="col-6">
+                                        <c:if test="${sprintFaces.haveOpenSprint()==false}">
+                                        <p:commandButton   icon="pi pi-save" value="#{core['button.save']}"
+                                                           update=":form:growl"
+                                                           
+                                                           action="#{sprintFaces.save()}"
+                                                           styleClass="w-auto mt-3"/>
+                                        </c:if>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <p:overlayPanel id="overlayPanelSprint" for="commandButtonView" widgetVar="widgetVarSprint" showCloseIcon="true"
+                                        style="width:560px">
+                            <div class="col-10 lg:col-10">
+                                <p:dataTable var="item" value="#{sprintFaces.sprintLazyDataModel}"
+                                             binding="#{sprintFaces.dataTable}"
+                                             id="dataTable"
+                                             widgetVar="widgetVardataTable"
+                                             lazy="true"
+                                             paginator="true"
+                                             rows="#{sprintFaces.rowPageSmall.get()}"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                             paginatorPosition="both"
+                                             reflow="true"
+                                             class="responsive-table display dataTable tablaajustada"
+                                             rowKey="#{item.idsprint}"
+                                             selection="#{sprintFaces.sprintSelected}"
+                                             rowSelectMode="add"
+
+                                             >
+<!--                                    <p:column headerText="#{msg['field.idsprint']}" sortable="true" sortBy="#{item.idsprint}">
+                                        <p:outputLabel value="#{item.idsprint}"/>
+
+                                    </p:column>-->
+ 
+
+                                    <p:column headerText="#{msg['field.sprint']}" sortable="true" sortBy="#{item.sprint}">
+                                        <p:outputLabel value="#{item.sprint}"/>
+
+                                    </p:column>
+
+                                    <p:column headerText="#{msg['field.fechainicial']}">
+                                        <p:outputLabel value="#{sprintFaces.showDate(item.fechainicial)}"/>
+
+                                    </p:column>
+                                    <p:column headerText="#{msg['field.fechafinal']}">
+                                        <p:outputLabel value="#{sprintFaces.showDate(item.fechafinal)}"/>
+
+                                    </p:column>
+                                    <p:column headerText="#{msg['field.open']}">
+                                      
+                                         <i class="pi pi-unlock" jsf:rendered="#{item.open eq false}"></i>    
+                                        <i class="pi pi-key" jsf:rendered="#{item.open eq true}"></i>    
+                                        
+                                      
+
+
+                                    </p:column>
+                                     <p:column exportable="false">
+                                            <p:commandButton icon="pi pi-pencil" 
+                                                             rendered="#{item.open}"
+                                                             title="#{core['button.sprintclose']}"
+                                                             update=":form:growl" 
+                                                             oncomplete="PF('widgetVarSprint').initPosition(); PF('widgetVarSprint').hide()"
+                                                             action="#{sprintFaces.prepareCloseSprint()}"
+                                                             styleClass="edit-button rounded-button ui-button-success" process="@this">
+
+                                                <f:setPropertyActionListener value="#{item}" target="#{sprintFaces.sprintSelected}"/>
+
+
+
+                                            
+                                            </p:commandButton>
+                                        </p:column>
+
+                                </p:dataTable>
+
+                            </div>
+
+                        </p:overlayPanel>
+
+
+                    </div> 
+
+                </div>
+            </div>
+
+
+
+        </h:form>
+        <h:form id="formaccessdenied" prependId="false"    
+                rendered="!#{p:ifAnyGranted('COLABORADOR,COORDINADOR-FACULTAD, DEVELOPERS,DIRECTOR,JEFE-UNIDAD,SUBDIRECTOR-ADMINISTRATIVO, SUBDIRECTOR-INVESTIGACION, SUBDIRECTOR-VIDA-UNIVERSITARIA')}">
+
+            <jmoordbcorejsf:accessdenied/>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

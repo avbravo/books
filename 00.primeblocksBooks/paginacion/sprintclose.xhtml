@@ -1,0 +1,171 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml"
+                xmlns:jmoordbcorejsf="http://xmlns.jcp.org/jsf/composite/jmoordbcorejsf"
+                xmlns:dashboard="http://xmlns.jcp.org/jsf/composite/dashboard"
+                xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+    <ui:define name="title">#{conf['application.title']}</ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>
+            <div class="chevron">/</div>
+            <h:link outcome="/home">#{core['breadcrumb.home']}</h:link>
+        </li>
+        <li>
+            <div class="chevron">/</div>
+            <h:link outcome="/scrum/dashboard">#{core['breadcrumb.dashboard']}</h:link>
+        </li>
+        <li>
+            <div class="chevron">/</div>
+            <h:link outcome="/scrum/sprint">#{core['breadcrumb.sprint']}</h:link>
+        </li>
+        <li>
+            <div class="chevron">/</div>
+            <h:link outcome="/scrum/sprintclose">#{core['breadcrumb.sprintclose']}</h:link>
+        </li>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form" prependId="false"  rendered="#{p:ifAnyGranted('COLABORADOR,COORDINADOR-FACULTAD, DEVELOPERS,DIRECTOR,JEFE-UNIDAD,SUBDIRECTOR-ADMINISTRATIVO, SUBDIRECTOR-INVESTIGACION, SUBDIRECTOR-VIDA-UNIVERSITARIA')}">
+            <p:growl id="growl"/>
+
+            <div class="block-category-title">#{core['form.sprintclose']}</div>
+
+            <!--<pb:blockViewerCore header="Sidebar" >-->
+            <div class="min-h-screen flex relative lg:static surface-ground">
+                <div id="app-sidebar"
+                     class="surface-section h-full lg:h-auto hidden lg:block flex-shrink-0 absolute lg:static left-0 top-0 z-1 border-right-1 surface-border select-none"
+                     style="width:280px">
+                    <div class="flex flex-column h-full">
+                        <div class="flex align-items-center px-5 flex-shrink-0" style="height:60px">
+                            <p:graphicImage name="images/blocks/logos/hyper-700.svg" library="primeblocks-app"
+                                            alt="Image" height="30"/>
+
+
+                        </div>
+                        <dashboard:leftmenu/>
+
+
+
+                        <dashboard:footer/>
+                    </div>
+                </div>
+                <div class="min-h-screen flex flex-column relative flex-auto">
+                    <dashboard:top/>
+
+                    <div class="surface-section">
+                        <div class="grid">
+                            <div class="col-12 lg:col-2">
+                                <div class="text-900 font-medium text-xl mb-3">#{core['form.sprintclose']}</div>
+                                <!--<p class="m-0 p-0 text-600 line-height-3 mr-3">Odio euismod lacinia at quis risus sed vulputate odio.</p>-->
+                            </div>
+                            <div class="col-12 lg:col-10">
+                                <div class="grid formgrid ui-fluid">
+                                    <div class="field mb-4 col-12">
+                                        <label for="proyecto" class="font-medium">#{msg['field.proyecto']}</label>
+                                        <p:inputText id="proyecto" value="#{sprintCloseFaces.proyectoSelected.proyecto}"
+                                                     disabled="true"  />
+                                    </div>
+                                    <div class="field mb-4 col-12">
+                                        <label for="prefijo" class="font-medium">#{msg['field.prefijo']}</label>
+                                        <p:inputText id="prefijo" value="#{sprintCloseFaces.proyectoSelected.prefijo}"
+                                                     disabled="true"/>
+                                    </div>
+                                    <div class="field mb-4 col-6">
+                                        <label  class="font-medium">#{msg['field.fechainicial']}</label>
+                                        <p:inputText  value="#{sprintCloseFaces.showDate(sprintCloseFaces.proyectoSelected.fechainicial)}"
+                                                      disabled="true"/>
+                                    </div>
+                                    <div class="field mb-4 col-6">
+                                        <label  class="font-medium">#{msg['field.fechafinal']}</label>
+
+                                        <p:inputText value="#{sprintCloseFaces.showDate(sprintCloseFaces.proyectoSelected.fechafinal)}"
+                                                     disabled="true"/>
+
+                                    </div>
+
+
+
+
+
+                                    <div class="field mb-4 col-12"   >
+                                        <label for="sprint" class="font-medium">#{msg['field.sprint']}</label>
+                                        <p:inputText value="#{sprintCloseFaces.sprintSelected.sprint}" id="sprint"
+                                                     disabled="true"
+
+                                                     />
+                                    </div>
+
+                                    <div class="field mb-4 col-12" >
+                                        <label for="descripcion" class="font-medium">#{msg['field.descripcion']}</label>
+                                        <p:inputTextarea disabled="true" id="descripcion" value="#{sprintCloseFaces.sprintSelected.descripcion}" rows="5" autoResize="true"/>
+                                    </div>
+                                    <div class="field mb-4 col-12 md:col-6"   >
+                                        <label for="fechainicial" class="font-medium text-900">#{msg['field.fechainicial']}</label>
+                                        <p:calendar disabled="true" id="fechainicial" value="#{sprintCloseFaces.sprintSelected.fechainicial}" showOn="button"/>
+                                    </div>
+                                    <div class="field mb-4 col-12 md:col-6"  >
+                                        <label for="fechafinal" class="font-medium text-900">#{msg['field.fechafinal']}</label>
+                                        <p:calendar disabled="true" id="fechafinal" value="#{sprintCloseFaces.sprintSelected.fechafinal}" showOn="button"/>
+                                    </div>
+<!--
+                                    <div class="col-6">
+                                        <p:commandButton id="commandButtonView" value="#{core['button.view']}"  icon="pi pi-eye"  title="#{core['button.view']}" styleClass="rounded-button ui-button-warning"/>
+
+                                    </div>-->
+                                    <div class="col-2">
+                                        <p:commandButton  value="#{core['button.return']}"  icon="pi pi-arrow-left"  title="#{core['button.return']}" styleClass="rounded-button ui-button-warning"
+                                                          action="sprint.xhtml"/>
+
+                                    </div>
+
+                                    <div class="col-6">
+
+                                        <p:commandButton   icon="pi pi-lock" value="#{core['button.closesprint']}"
+                                                           update=":form:growl"
+
+                                                           action="#{sprintCloseFaces.closeSprint()}"
+                                                           styleClass="w-auto mt-3 rounded-button ui-button-danger"
+                                                           >
+                                            <p:confirm header="#{core['confirmdialog.header']}" message="#{core['confirmdialog.messageclosesprint']}" icon="pi pi-info-circle"/>
+                                        </p:commandButton>
+
+                                    
+
+                                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                                            <p:commandButton value="#{core['button.no']}" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                                            <p:commandButton value="#{core['button.yes']}" type="button" styleClass="ui-confirmdialog-yes" />
+                                        </p:confirmDialog>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                
+
+
+                    </div> 
+
+                </div>
+            </div>
+
+
+
+        </h:form>
+        <h:form id="formaccessdenied" prependId="false"    
+                rendered="!#{p:ifAnyGranted('COLABORADOR,COORDINADOR-FACULTAD, DEVELOPERS,DIRECTOR,JEFE-UNIDAD,SUBDIRECTOR-ADMINISTRATIVO, SUBDIRECTOR-INVESTIGACION, SUBDIRECTOR-VIDA-UNIVERSITARIA')}">
+
+            <jmoordbcorejsf:accessdenied/>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

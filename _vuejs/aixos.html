@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  #loading {
+    display: none;
+  }
+  </style>
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  
+  <button id="carga_ajax">Carga contenido</button> 
+  <button id="json_get">Request JSON GET</button> 
+  <button id="json_post">Request JSON POST</button>
+  <div id="mensaje"></div>
+  <div id="loading">cargando...</div>
+  
+  <script>
+var loading = document.getElementById('loading');
+var mensaje = document.getElementById('mensaje');
+
+var boton = document.getElementById('carga_ajax');
+boton.addEventListener('click', function() {
+  loading.style.display = 'block';
+  axios.get('texto.txt', {
+    responseType: 'text'
+  })
+    .then(function(res) {
+      if(res.status==200) {
+        mensaje.innerHTML = res.data;
+      }
+      console.log(res);
+    })
+    .catch(function(err) {
+      mensaje.innerText = 'Error de conexión ' + err;
+    })
+    .then(function() {
+      loading.style.display = 'none';
+    });
+});
+
+
+    var boton = document.getElementById('json_get');
+    boton.addEventListener('click', function() {
+      loading.style.display = 'block';
+      axios.get('http://localhost:8080/persona', {
+        responseType: 'json'
+      })
+        .then(function(res) {
+          if(res.status==200) {
+            console.log(res.data);
+            mensaje.innerHTML = res.data.title;
+          }
+          console.log(res);
+        })
+        .catch(function(err) {
+          console.log(err);
+        })
+        .then(function() {
+          loading.style.display = 'none';
+        });
+    });
+
+    var boton = document.getElementById('json_post');
+    boton.addEventListener('click', function() {
+      loading.style.display = 'block';
+      axios.post('https://jsonplaceholder.typicode.com/posts', {
+        data: {
+          userId: 1,
+          title: 'Esto es un post nuevo',
+          body: 'cuerpo de este post. Me gusta la librería Axios!!'
+        }
+      })
+        .then(function(res) {
+          if(res.status==201) {
+            mensaje.innerHTML = 'El nuevo Post ha sido almacenado con id: ' + res.data.id;
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        })
+        .then(function() {
+          loading.style.display = 'none';
+        });
+    });
+  </script>
+</body>
+</html>

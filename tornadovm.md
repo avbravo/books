@@ -1,0 +1,2 @@
+
+[Cómo se relacionan entre sí TornadoVM y Project Babylon - JVM Weekly vol. 118How TornadoVM and Project Babylon Relate to Each Other - JVM Weekly vol. 118](https://www.jvm-weekly.com/p/how-tornadovm-and-project-babylon?utm_source=post-email-title&publication_id=862586&post_id=157051158&utm_campaign=email-post-title&isFreemail=true&r=1p3spy&triedRedirect=true&utm_medium=email&hide_intro_popup=true)

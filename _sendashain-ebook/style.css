@@ -1,0 +1,62 @@
+body {
+    max-width: 45em;
+    margin: 0 auto;
+    padding: .5em 1em 1em 1em;
+    background-color: white;
+    border: .1em solid #c0c0c0;
+}
+
+html {
+    background-color: lightgray;
+}
+
+h2 {
+    text-align: right;
+}
+
+img {
+    max-width: 100%;
+}
+
+li a {
+    text-decoration: none;
+}
+
+p, li {
+    line-height: 1.5em;
+}
+
+section.citas{
+    background-color: black;
+    color: white;
+}
+
+p.autor-portada {
+    font-size: x-large;
+    font-weight: bold;
+    text-align: right;
+}
+
+sup {
+    line-height: 1;
+}
+
+ul {
+    list-style: none;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.indice {
+    font-size: 130%;
+}
+
+.titulo-capitulo {
+    /*font-size: 120%;*/
+    font-size: 70Ppx;
+    font-weight: bold;
+    text-align: right;
+    
+}

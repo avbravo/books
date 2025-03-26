@@ -1,0 +1,28 @@
+
+Para formatear el codigo Java coloque la sintaxis
+
+When you use listings for syntax-highlighting (passing the flag --listings on the command line),
+ then you just have to replace the \small in line 681 by a 
+
+font size of your choice. You can use \tiny, \scriptsize, 
+\footnotesize, \small, \normalsize, \large, \Large, \LARGE, \huge and \Huge.
+
+
+```
+\small
+
+```java
+    public class Clase{
+}
+```
+\normalsize
+
+```
+
+quedaria
+\small
+```java
+    public class Clase{
+}
+```
+\normalsize
