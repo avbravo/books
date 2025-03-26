@@ -49,13 +49,13 @@ Este repositorio cuenta con libros e investigaciones
 # Temas
 | Tema | Descripción |
 | --- | ----------- |
-|[Doctorado](doctorado/doctorado.md)|Doctorado |
-|[Self-contained Systems (SCS)](self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
-|[Clientes Rest](clientesrest.md)| Clientes Rest |
-|[Object Storage](objectstorage/objectstorage.md)| Oject storage |
-|[Idempotency](idempotency.md) | What is idempotency?- An operation that produces the same output regardless of the number of times it’s executed, with the same input. This Ensures data consistency and prevents duplicate operations.|
+| [Doctorado](doctorado/doctorado.md)|Doctorado |
+| [Self-contained Systems (SCS)](self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
+| [Clientes Rest](clientesrest.md)| Clientes Rest |
+| [Object Storage](objectstorage/objectstorage.md)| Oject storage |
+| [Idempotency](idempotency.md) | What is idempotency?- An operation that produces the same output regardless of the number of times it’s executed, with the same input. This Ensures data consistency and prevents duplicate operations.|
 | [ClientesRest](clientesrest.md)| Clientes Rest |
-| [ia](ia.md)| IA , LANGCHAIN|
+| [ia](ia/ia.md)| IA , LANGCHAIN|
 | [ML](ml.md)| ML|
 | [Apache](apache.md) | Proyectos de la fundación Apache, BigData,alto rendimiento|
 | [Architecture Decision Records](architecturedecisionrecords.md)|Architecture Decision Records |
@@ -65,7 +65,7 @@ Este repositorio cuenta con libros e investigaciones
 | [JMS](java/jms/jms.md) | JMS con Payara |
 | [javawebframework](java/javawebframework/javawebframework.md) | javawebframework |
 | [Kafka](java/kafka/kafka.md)| Kafka |
-| [Hadoop](hadoop.md) | Hadoop |
+| [Hadoop](hadoop/hadoop.md) | Hadoop |
 | [Minio](minio.md)| Minio |
 | [Pinteres](pinterest.md) | Pinterest |
 | [Cache](cache.md)| Cache |
@@ -78,32 +78,33 @@ Este repositorio cuenta con libros e investigaciones
 | [Serializaciom](serialization/serializacion.md)| Apache Fury, FlatBuffers is a cross platform serialization library architected for maximum memory efficiency. It allows you to directly access serialized data without parsing/unpacking it first, while still having great forwards/backwards compatibility.|
 | [StreamData](streamdata.md) | StreamData Ejemplo de una aplicación que consulta cada cambio en una base de datos Postgresql |
 | [DataBases](datatabase/databases.md) | Comparar ArcadeDB con EclipseStore |
-|[DataLake](datalake/datalake.md)| DataLake (lago de datos) alto rendimiento repositorios, Ver el proyecto Project Nessie  (base de datos estilo GIT). Concepto para crear una base de datos|
+| [DataLake](datalake/datalake.md)| DataLake (lago de datos) alto rendimiento repositorios, Ver el proyecto Project Nessie  (base de datos estilo GIT). Concepto para crear una base de datos|
 | [Docker](docker/docker.md) | Docker|
 | [Doctorado](doctorado.md)| Doctorado|
 | [Microservicios](microservices.md) | Microservicios y Arquitecturas, Idempotency | 
 | [JWT Token](/java/jwt/jwt.md)|JWT|
 | [Event Driven Architecture](event-driven-architecture.md)| Building reliable business processes using API-driven microservices is a common goal for modern applications|
-| [Java HttpServer| Crear Servidores Java con Virtual Thread |
+| [Java HttpServer]| Crear Servidores Java con Virtual Thread |
 | [Jmoordbcore](jmoordbcore.md)| JmoordbCore Framework Java para NoSQL |
 | [Java](java/java.md)| Java, Lambda Stream/ Vector API |
-|[Jakarta EE](jakartaee.md) | Jakarta EE especificaciones JakartaEE|
+| [Jakarta EE](jakartaee.md) | Jakarta EE especificaciones JakartaEE|
 | [mongodb](mongodb.md) | MongoDB |
 | [excalidraw](https://excalidraw.com/) | Diagramnas y diseño|
-|[lsm](lsm.md) |LSM|
-|[DataBases](databases.md)| DataBases, NoSQL, Relational , Vector |
-|[Markdown](markdown.md)| Guia de Markdown |
-|[Payara Micro](payaramicro.md) | Payara Micro |
-|[Utp](utp.md)| Utp|
-|[MVC](mvc.md)| MVC |
-|[Apache Wicket](mvc.md)| Apache Wicket |
-|[Java web framewok from scratch](javawebframework.md)|  Java web framewok (cdi+ jakartaee+microprofile+jmoordbcore + virtual thread)|
+| [lsm](lsm.md) |LSM|
+| [DataBases](databases/databases.md)| DataBases, NoSQL, Relational , Vector |
+| [Markdown](markdown.md)| Guia de Markdown |
+| [Payara Micro](payaramicro.md) | Payara Micro |
+| [Utp](utp.md)| Utp|
+| [MVC](mvc.md)| MVC |
+| [Apache Wicket](mvc.md)| Apache Wicket |
+| [Java web framewok from scratch](javawebframework.md)|  Java web framewok (cdi+ jakartaee+microprofile+jmoordbcore + virtual thread)|
 | [Reserve Proxy](reserveproxy.md) | Reserve Proxy |
 | [Decodable](decodable.md) | Decodable |
 | [ Kubernetes](kubernetes.md) | Kubernetes |
 | [Iconos](iconos.md) | Iconos|
 | [Testing](testing/testing.md)| Testing|
-| [Postman](postman.md)| Postman|
+| [Postman](postman/postman.md)| Postman|
+| [Podman](podman/podman.md)| Podman|
 
 ## Arquitecturas
 

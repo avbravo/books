@@ -4,7 +4,7 @@
 
 Selecciones BODY luego raw
 
-![](postman_post.png)
+![](resources/postman_post.png)
 
 
 Para hacer la consulta POST: localhost:9000/estacionesserver/api/medicion y mando los siguientes datos:
