@@ -51,7 +51,6 @@ Este repositorio cuenta con libros e investigaciones
 | --- | ----------- |
 | [Doctorado](doctorado/doctorado.md)|Doctorado |
 | [Self-contained Systems (SCS)](self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
-| [Clientes Rest](clientesrest.md)| Clientes Rest |
 | [Object Storage](objectstorage/objectstorage.md)| Oject storage |
 | [Idempotency](idempotency.md) | What is idempotency?- An operation that produces the same output regardless of the number of times it’s executed, with the same input. This Ensures data consistency and prevents duplicate operations.|
 | [ClientesRest](clientesrest.md)| Clientes Rest |
@@ -61,15 +60,8 @@ Este repositorio cuenta con libros e investigaciones
 | [Architecture Decision Records](architecturedecisionrecords.md)|Architecture Decision Records |
 | [Books](books/books.md) | Books|
 | [Blogs](blogs/blogs.md) | Blogs |
-| [Graalvm](java/graalvm/graalvm.md) |GraalVM | 
-| [JMS](java/jms/jms.md) | JMS con Payara |
-| [javawebframework](java/javawebframework/javawebframework.md) | javawebframework |
-| [Kafka](java/kafka/kafka.md)| Kafka |
 | [Hadoop](hadoop/hadoop.md) | Hadoop |
 | [Minio](minio.md)| Minio |
-| [Pinteres](pinterest.md) | Pinterest |
-| [Cache](cache.md)| Cache |
-| [Primefaces](java/primefaces/primefaces.md) | Primefaces |
 | [DataFlow](dataflow.md)| DataFlow |
 | [Load Balancer](loadbalanced/loadbalancer.md) | Load Balancer|
 | [DataScience](datascience.md)| DataScience |
@@ -82,22 +74,16 @@ Este repositorio cuenta con libros e investigaciones
 | [Docker](docker/docker.md) | Docker|
 | [Doctorado](doctorado.md)| Doctorado|
 | [Microservicios](microservices.md) | Microservicios y Arquitecturas, Idempotency | 
-| [JWT Token](/java/jwt/jwt.md)|JWT|
 | [Event Driven Architecture](event-driven-architecture.md)| Building reliable business processes using API-driven microservices is a common goal for modern applications|
-| [Java HttpServer]| Crear Servidores Java con Virtual Thread |
 | [Jmoordbcore](jmoordbcore.md)| JmoordbCore Framework Java para NoSQL |
-| [Java](java/java.md)| Java, Lambda Stream/ Vector API |
-| [Jakarta EE](jakartaee.md) | Jakarta EE especificaciones JakartaEE|
 | [mongodb](mongodb.md) | MongoDB |
 | [excalidraw](https://excalidraw.com/) | Diagramnas y diseño|
 | [lsm](lsm.md) |LSM|
 | [DataBases](databases/databases.md)| DataBases, NoSQL, Relational , Vector |
 | [Markdown](markdown.md)| Guia de Markdown |
-| [Payara Micro](payaramicro.md) | Payara Micro |
 | [Utp](utp.md)| Utp|
 | [MVC](mvc.md)| MVC |
 | [Apache Wicket](mvc.md)| Apache Wicket |
-| [Java web framewok from scratch](javawebframework.md)|  Java web framewok (cdi+ jakartaee+microprofile+jmoordbcore + virtual thread)|
 | [Reserve Proxy](reserveproxy.md) | Reserve Proxy |
 | [Decodable](decodable.md) | Decodable |
 | [ Kubernetes](kubernetes.md) | Kubernetes |
@@ -106,18 +92,37 @@ Este repositorio cuenta con libros e investigaciones
 | [Postman](postman/postman.md)| Postman|
 | [Podman](podman/podman.md)| Podman|
 
+# Java
+| Tema | Descripción |
+| [Java](java/java.md)| Java, Lambda Stream/ Vector API |
+| [Clientes Rest](java/clientesrest/clientesrest.md)| Clientes Rest |
+| [javawebframework](java/javawebframework/javawebframework.md) | javawebframework |
+| [Java web framewok from scratch](java/javawebframework/javawebframework.md)|  Java web framewok (cdi+ jakartaee+microprofile+jmoordbcore + virtual thread)|
+| [JWT Token](/java/jwt/jwt.md)|JWT|
+| [Kafka](java/kafka/kafka.md)| Kafka |
+| [Jakarta EE](jakartaee/jakartaee.md) | Jakarta EE especificaciones JakartaEE|
+| [Cache](java/cache/cache.md)| Cache |
+| [Primefaces](java/primefaces/primefaces.md) | Primefaces |
+| [Java HttpServer]| Crear Servidores Java con Virtual Thread |
+| [Graalvm](java/graalvm/graalvm.md) |GraalVM | 
+| [JMS](java/jms/jms.md) | JMS con Payara |
+| [Payara Micro](java/payara/payaramicro.md) | Payara Micro |
+
 ## Arquitecturas
 
 | Tema | Descripción |
 | --- | ----------- |
 | [Arquitectura](arquitectura/arquitectura.md)| Arquitectura |
-| [Amazon](amazon/amazon.md)| Amazon |
-| [Uber](uber.md)| Uber |
-| [Google](google.md) | Google |
-| [NetFlix](netflix.md) | NetFlix |
-| [Twitter](twitter/twitter.md) | Twitter|
-| [Whatsapp](whatsapp.md)| Whatsapp|
-| [BlueSky](bluesky.md)| BlueSky|
+| [Amazon](arquitectura/amazon/amazon.md)| Amazon |
+| [Bloom](arquitectura/bloom/bloom.md)| Bloom |
+| [BlueSky](arquitectura/bluesky/bluesky.md)| BlueSky|
+| [Google](arquitectura/google.md) | Google |
+| [NetFlix](arquitectura/netflix.md) | NetFlix |
+| [Pinterest](arquitectura/pinterest/pinterest.md)| Pinterest|
+| [Twitter](arquitectura/twitter/twitter.md) | Twitter|
+| [Uber](arquitectura/uber/uber.md)| Uber |
+| [Whatsapp](arquitectura/whatsapp.md)| Whatsapp|
+
 
 
 
