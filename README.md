@@ -50,7 +50,7 @@ Este repositorio cuenta con libros e investigaciones
 | --- | ----------- |
 |[Self-contained Systems (SCS)](self-containedsystems(SCS).md)|Self-contained Systems (SCS) |
 |[Clientes Rest](clientesrest.md)| Clientes Rest |
-|[Object Storage](objectstorage.md)| Oject storage |
+|[Object Storage](objectstorage/objectstorage.md)| Oject storage |
 |[Idempotency](idempotency.md) | What is idempotency?- An operation that produces the same output regardless of the number of times it’s executed, with the same input. This Ensures data consistency and prevents duplicate operations.|
 | [ClientesRest](clientesrest.md)| Clientes Rest |
 | [ia](ia.md)| IA , LANGCHAIN|
