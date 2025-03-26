@@ -28,6 +28,7 @@ Este repositorio cuenta con libros e investigaciones
 
 
 # Proyecto de Doctorado
+[doctorado](doctorado/doctorado.md)
 * Apache Fury con Apache Arrrow para almacenamiento
 * Una base de datos que implemente LSM con Weka tal vez Apache Fury con Serializacion
 * Apache Pulsar
@@ -57,11 +58,12 @@ Este repositorio cuenta con libros e investigaciones
 | [ML](ml.md)| ML|
 | [Apache](apache.md) | Proyectos de la fundación Apache, BigData,alto rendimiento|
 | [Architecture Decision Records](architecturedecisionrecords.md)|Architecture Decision Records |
-| [Books](books.md) | Books|
-| [Blogs](blogs.md) | Blogs |
-| [Graalvm](graalvm.md) |GraalVM | 
-| [JMS](jms.md) | JMS con Payara |
-| [Kafka](kafka.md)| Kafka |
+| [Books](books/books.md) | Books|
+| [Blogs](blogs/blogs.md) | Blogs |
+| [Graalvm](java/graalvm/graalvm.md) |GraalVM | 
+| [JMS](java/jms/jms.md) | JMS con Payara |
+| [javawebframework](java/javawebframework/javawebframework.md) | javawebframework |
+| [Kafka](java/kafka/kafka.md)| Kafka |
 | [Hadoop](hadoop.md) | Hadoop |
 | [Minio](minio.md)| Minio |
 | [Pinteres](pinterest.md) | Pinterest |
@@ -80,9 +82,8 @@ Este repositorio cuenta con libros e investigaciones
 | [Doctorado](doctorado.md)| Doctorado|
 | [Microservicios](microservices.md) | Microservicios y Arquitecturas, Idempotency | 
 | [JWT Token](/java/jwt/jwt.md)|JWT|
-
 | [Event Driven Architecture](event-driven-architecture.md)| Building reliable business processes using API-driven microservices is a common goal for modern applications|
-| Java HttpServer| Crear Servidores Java con Virtual Thread |
+| [Java HttpServer| Crear Servidores Java con Virtual Thread |
 | [Jmoordbcore](jmoordbcore.md)| JmoordbCore Framework Java para NoSQL |
 | [Java](java/java.md)| Java, Lambda Stream/ Vector API |
 |[Jakarta EE](jakartaee.md) | Jakarta EE especificaciones JakartaEE|
@@ -107,6 +108,8 @@ Este repositorio cuenta con libros e investigaciones
 
 | Tema | Descripción |
 | --- | ----------- |
+| [Arquitectura](arquitectura/arquitectura.md)| Arquitectura |
+| [Amazon](amazon/amazon.md)| Amazon |
 | [Uber](uber.md)| Uber |
 | [Google](google.md) | Google |
 | [NetFlix](netflix.md) | NetFlix |
