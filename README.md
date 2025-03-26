@@ -80,6 +80,7 @@ Este repositorio cuenta con libros e investigaciones
 # Doctorado
 
 | Tema | Descripción |
+| --- | ----------- |
 | [DataBases](datatabase/databases.md) | Comparar ArcadeDB con EclipseStore |
 | [Dataflow](dataflow/dataflow.md)|Dataflow |
 | [DataLake](datalake/datalake.md)| DataLake (lago de datos) alto rendimiento repositorios, Ver el proyecto Project Nessie  (base de datos estilo GIT). Concepto para crear una base de datos|
@@ -103,6 +104,7 @@ Este repositorio cuenta con libros e investigaciones
 # Java
 
 | Tema | Descripción |
+| --- | ----------- |
 | [Java](java/java.md)| Java, Lambda Stream/ Vector API |
 | [Clientes Rest](java/clientesrest/clientesrest.md)| Clientes Rest |
 | [javawebframework](java/javawebframework/javawebframework.md) | javawebframework |
@@ -117,6 +119,8 @@ Este repositorio cuenta con libros e investigaciones
 | [JMS](java/jms/jms.md) | JMS con Payara |
 | [Payara Micro](java/payara/payaramicro.md) | Payara Micro |
 | [TornadoVM](java/tornadovm/tornadovm.md) | TornadoVM |
+
+
 ## Arquitecturas
 
 | Tema | Descripción |
