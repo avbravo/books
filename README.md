@@ -66,24 +66,25 @@ Este repositorio cuenta con libros e investigaciones
 | [Minio](minio.md)| Minio |
 | [Pinteres](pinterest.md) | Pinterest |
 | [Cache](cache.md)| Cache |
-| [Primefaces](primefaces.md) | Primefaces |
+| [Primefaces](java/primefaces/primefaces.md) | Primefaces |
 | [DataFlow](dataflow.md)| DataFlow |
-| [Load Balancer](loadbalancer.md) | Load Balancer|
+| [Load Balancer](loadbalanced/loadbalancer.md) | Load Balancer|
 | [DataScience](datascience.md)| DataScience |
 | [Embedding](embedding.md) | Embedding|
 | [FileSystems](filesystems.md) | File Systems|
-| [Serializaciom](serializacion.md)| Apache Fury, FlatBuffers is a cross platform serialization library architected for maximum memory efficiency. It allows you to directly access serialized data without parsing/unpacking it first, while still having great forwards/backwards compatibility.|
+| [Serializaciom](serialization/serializacion.md)| Apache Fury, FlatBuffers is a cross platform serialization library architected for maximum memory efficiency. It allows you to directly access serialized data without parsing/unpacking it first, while still having great forwards/backwards compatibility.|
 | [StreamData](streamdata.md) | StreamData Ejemplo de una aplicación que consulta cada cambio en una base de datos Postgresql |
-| [DataBases](databases.md) | Comparar ArcadeDB con EclipseStore |
-|[DataLake](datalake.md)| DataLake (lago de datos) alto rendimiento repositorios, Ver el proyecto Project Nessie  (base de datos estilo GIT). Concepto para crear una base de datos|
-| [Docker](docker.md) | Docker|
+| [DataBases](datatabase/databases.md) | Comparar ArcadeDB con EclipseStore |
+|[DataLake](datalake/datalake.md)| DataLake (lago de datos) alto rendimiento repositorios, Ver el proyecto Project Nessie  (base de datos estilo GIT). Concepto para crear una base de datos|
+| [Docker](docker/docker.md) | Docker|
 | [Doctorado](doctorado.md)| Doctorado|
 | [Microservicios](microservices.md) | Microservicios y Arquitecturas, Idempotency | 
-| [JWT Token](jwt.md)|Load Balancer, Reverse Proxy con Docker |
+| [JWT Token](/java/jwt/jwt.md)|JWT|
+
 | [Event Driven Architecture](event-driven-architecture.md)| Building reliable business processes using API-driven microservices is a common goal for modern applications|
 | Java HttpServer| Crear Servidores Java con Virtual Thread |
 | [Jmoordbcore](jmoordbcore.md)| JmoordbCore Framework Java para NoSQL |
-| [Java](java.md)| Java, Lambda Stream/ Vector API |
+| [Java](java/java.md)| Java, Lambda Stream/ Vector API |
 |[Jakarta EE](jakartaee.md) | Jakarta EE especificaciones JakartaEE|
 | [mongodb](mongodb.md) | MongoDB |
 | [excalidraw](https://excalidraw.com/) | Diagramnas y diseño|

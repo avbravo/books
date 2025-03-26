@@ -51,7 +51,7 @@ Puede ingresar a las diversas opciones y puede ver los resultados
 
 8. Observe en la pagina
 
- ![](jwt1.png)
+ ![](resources/jwt1.png)
  
 De clic en **Call Secured endpoint with JWT in Authorization Header**
 
@@ -64,7 +64,7 @@ De clic en **Call Secured endpoint with JWT in Authorization Header**
 
 9. A modo de ejemplo colocamos la opción que el sistema muestre el JWT generado en la salida de serverjwt
 
-![](jwt_token_generado.png)
+![](resources/jwt_token_generado.png)
 
 
 * Copie el token que se genera para realizar las autentificaciones
@@ -183,7 +183,7 @@ http://localhost:9011/api/protected
 
 No muestra el mensaje de error de acceso
 
-![](jwt_secure.png)
+![](resources/jwt_secure.png)
 
 
 
@@ -220,7 +220,7 @@ Si desea probarlo con postman
 * En Token pegue el token
 * 
 
-![](jwt_postman.png)
+![](resources/jwt_postman.png)
 
 ---
 

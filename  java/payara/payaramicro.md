@@ -15,3 +15,10 @@ mvn package payara-micro:dev
 * [Connect Payara Micro to External JMS Broker by Deploying a RAR file](https://blog.payara.fish/connect-payara-micro-to-external-jms-broker)
 
 * [JMS Client Examples](https://github.com/payara/Payara-Examples/tree/master/payara-micro/jms-client-example)
+
+
+# PayaraMicro
+Starting payara-micro from path: /home/avbravo/.m2/repository/fish/payara/extras/payara-micro/6.2021.1.Alpha1/payara-micro-6.2021.1.Alpha1.jar
+
+Correr servidor seguro
+https://docs.payara.fish/enterprise/docs/documentation/payara-micro/port-autobinding.html
