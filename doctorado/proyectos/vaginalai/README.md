@@ -1,3 +1,5 @@
+
+
 # Vaginalia
 
 Pasos: 
@@ -59,3 +61,6 @@ java -jar /home/avbravo/software/payara/payara-micro-6.2025.3.jar --deploy /home
 # Ejecutar
 
 java -jar /home/avbravo/Descargas/vaginalia.jar --port 8080
+
+falta nohazelcast
+
