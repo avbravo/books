@@ -6,6 +6,10 @@ Proyecto
 
 [https://github.com/avbravo/bookmicro](https://github.com/avbravo/bookmicro)
 
+[https://vaadin.com/components](https://vaadin.com/components)
+
+---
+
 
 Crear un proyecto Web 
 
@@ -181,3 +185,23 @@ public class MainView extends VerticalLayout {
 
 
 ![](resources/06_grid.png)
+
+
+## Cambiar el color del boton
+
+```Java
+  button.getElement().getStyle().set("color","green");
+```
+
+---
+# Java Script
+## Ejecutar JavaScript
+```java
+   button.getElement().executeJs("thos.style.color='red';");
+```
+
+
+## Agregar NpmPackage o un modulo
+@Route
+@NpmPackage
+@JsModule("my/library")
