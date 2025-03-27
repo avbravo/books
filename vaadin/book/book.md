@@ -135,3 +135,49 @@ public class MainView extends VerticalLayout {
     }
 }
 ```
+
+
+# Agregar un Grid
+
+Inserte el siguiente codigo
+
+```java
+Grid<String> grid = new Grid<String>();
+grid.addColumn(s -> s).setHeader("String itself");
+grid.addColumn(s -> s.length()).setHeader("Lenght");
+grid.setItems("foo", "bar", "matti", "luqman");
+add(grid);
+
+```
+
+Quedaria
+
+```java
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
+
+@Route
+public class MainView extends VerticalLayout {
+
+    public MainView() {
+        Button button = new Button("Click me",
+                event -> add(new Paragraph("Clicked!")));
+        Grid<String> grid = new Grid<String>();
+        grid.addColumn(s -> s).setHeader("String itself");
+        grid.addColumn(s -> s.length()).setHeader("Lenght");
+        grid.setItems("foo", "bar", "matti", "luqman");
+        add(grid);
+        add(button);
+
+    }
+}
+
+
+```
+
+
+
+![](resources/06_grid.png)
