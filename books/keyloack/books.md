@@ -1,21 +1,9 @@
-# Helidon MP OIDC Security Provider
-
-* [Helidon MP OIDC Security Provider](https://helidon.io/docs/v3/mp/guides/security-oidc)
-
-
-
-En el capitulo nos basaremos en la guia propuesta por Helidon que consiste en implementar seguridad de Open ID Connect (OIDC). 
-
-```
-OIDC es un mecanismo seguro para que una aplicación contacte con un servicio de identidad. 
-
-Está basado en OAuth 2.0 y proporciona protocolos completos de autenticación y autorización.
-```
-
 
 ## KeyLoak
 
 [keycloak](https://www.keycloak.org/)
+
+[Get started with Keycloak on Docker](https://www.keycloak.org/getting-started/getting-started-docker)
 
 ```
 Gestión de identidad y acceso de código abierto
@@ -64,3 +52,31 @@ Ingrese a [http://localhost:8080/admin](http://localhost:8080/admin)
 
 ![](resources/00_consola.png)
 
+
+Se muestra el dashboad
+
+![](resources/01_dashboard.png)
+
+
+Un dominio en Keycloak es equivalente a un inquilino. Cada dominio permite al administrador crear grupos aislados de aplicaciones y usuarios. Inicialmente, Keycloak incluye un único dominio, llamado maestro. Úselo solo para administrar Keycloak, no para administrar aplicaciones.
+
+Siga estos pasos para crear el primer dominio:
+
+Abra la Consola de administración de Keycloak.
+
+Haga clic en Keycloak junto al dominio maestro y luego en Crear dominio.
+
+![](resources/02_myrealname.png)
+
+
+Introduzca myrealm en el campo Nombre del dominio.
+
+Haga clic en Crear.
+
+
+
+![](resources/03_crear.png)
+
+Se muestra el realname creado
+
+![](resources/04_creado.png)
