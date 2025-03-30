@@ -5,6 +5,8 @@
 
 [Get started with Keycloak on Docker](https://www.keycloak.org/getting-started/getting-started-docker)
 
+[Helidon MP OIDC Security Provider](https://helidon.io/docs/v3/mp/guides/security-oidc)
+
 ```
 Gestión de identidad y acceso de código abierto
 Autentique sus aplicaciones y proteja sus servicios con el mínimo esfuerzo.
