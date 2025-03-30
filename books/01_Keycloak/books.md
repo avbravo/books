@@ -1,5 +1,5 @@
 
-## KeyLoak
+## Keycloak
 
 [keycloak](https://www.keycloak.org/)
 
@@ -201,3 +201,8 @@ docker ps -a
 docker start $ID_O_NOMBREIMAGEN
 
 ```
+
+
+## basic autentification microprofile restclient
+
+https://itnext.io/authentication-with-microprofile-rest-client-d1e9da774f70
