@@ -184,3 +184,18 @@ en la seccion Secure the first application
 y en
 https://helidon.io/docs/v3/mp/guides/security-oidc
 en la seccion  Create a Client
+
+
+## Volver a ejecutar la imagen
+
+* Si la imagen fue detenida
+
+ejecute
+
+```shell
+
+docker ps -a
+
+docker start $ID_O_NOMBREIMAGEN
+
+```
