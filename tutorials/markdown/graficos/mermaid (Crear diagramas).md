@@ -16,11 +16,13 @@ https://docs.github.com/es/get-started/writing-on-github/working-with-advanced-f
 Ejemplo:
 
 ```mermaid
+
 graph TD;
     A-->B;
     A-->C;
     B-->D;
     C-->D;
+
 ```
 
 
