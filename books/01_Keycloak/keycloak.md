@@ -9,6 +9,17 @@
 
 [Keycloak authorization client](https://www.keycloak.org/securing-apps/authz-client)
 
+[Configurar JWT con Keycloak](https://docs.platformatic.dev/docs/next/guides/jwt-keycloak)
+
+Tareas
+
+[ ] Crear clientes
+[ ] Agregar grupos
+[ ] JWT
+[ ] Helidon
+[ ] PayaraMicro
+
+
 ```
 Gestión de identidad y acceso de código abierto
 Autentique sus aplicaciones y proteja sus servicios con el mínimo esfuerzo.
@@ -559,4 +570,73 @@ Intente acceder a [http://localhost:7987/greet](http://localhost:7987/greet)
 Se redirigue al portal de keycloak para autentificarse
 
 ![](resources/26_useredirect.png)
+
+
+---
+# JWT
+
+[Configurar JWT con Keycloak](https://docs.platformatic.dev/docs/next/guides/jwt-keycloak)
+
+Ingresar a keycloak y crear un nuevo cliente
+
+
+![](resources/27_jwtclient.png)
+
+Establecer como ID **keycloak-jwt**
+
+
+![](resources/28_data.png)
+
+Presionar el botón Next
+
+Activar:
+
+Client authentication: **On**
+
+Authentication flow: **Standar Flow**
+
+- [x] Direct access grant
+
+- [x] Service accounts roles
+
+
+![](resources/29_roles.png)
+
+Configure: 
+
+Valid redirect URIs: **/***
+
+Web origins: **/***
+
+![](resources/30_config.png)
+
+Presione el boton Save
+
+
+En la pestaña Credentials
+
+![](resources/31_credenciales.png)
+
+Puede copiar el Client Secret
+
+Work:
+```
+IRDgsG9QmHn7EXimrqHuN1A5wftw17ox
+
+```
+
+## Realm roles
+
+![](resources/32_realroles.png)
+
+Cree un rol llamado **movies:read**
+
+
+![](resources/33_roles.png)
+
+presione el botón **Save**
+
+Regrese a la pestaña Clientes y seleccione **keycloak-jwt**
+
+![](resources/34_clientes.png)
 
