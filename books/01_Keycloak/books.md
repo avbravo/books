@@ -138,7 +138,7 @@ En la pestana detalles actualizamos el nombre y apellido del usuario
 
 Ingrese a 
 
-[http://localhost:8080/realms/myrealm/account](http://localhost:8080/realms/myrealm/account)
+[http://localhost:9190/realms/myrealm/account](http://localhost:9190/realms/myrealm/account)
 
 ![](resources/13_login.png)
 
@@ -186,6 +186,12 @@ en la seccion Secure the first application
 y en
 https://helidon.io/docs/v3/mp/guides/security-oidc
 en la seccion  Create a Client
+
+
+
+
+
+
 
 
 ## Volver a ejecutar la imagen
