@@ -176,23 +176,38 @@ De clic en Client
 
 ![](resources/17_clientes.png)
 
-*** Quede Aqui
 
-https://www.keycloak.org/getting-started/getting-started-docker
+De clic en el botón **Create client**
 
-en la seccion Secure the first application
+Ingrese los siguientes valores:
 
+```
+Client type: OpenID Connect
 
-y en
-https://helidon.io/docs/v3/mp/guides/security-oidc
-en la seccion  Create a Client
+Client ID: myclient
 
+```
 
-
-
-
+![](resources/18_creacion.png)
 
 
+Presione el boton siguiente y verifique que este seleccionado
+
+Authentification Flow: Standard flow
+
+
+![](resources/19_standar.png)
+
+Presione el botón **Next**
+
+En Valid redirect URIs agregue: http://localhost:7987/*
+
+
+![](resources/20_setting.png)
+
+
+
+---
 
 ## Volver a ejecutar la imagen
 
