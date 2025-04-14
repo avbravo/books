@@ -1,3 +1,6 @@
+- [] componente imagen
+- [] componente login solo sepasa al controller
+- [] logincompleto con roles
 
 - [] Integrar Payaramicro
 - [] Descargar los css y js de tailwindcss
