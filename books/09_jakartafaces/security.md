@@ -212,3 +212,222 @@ java -jar payara-micro.jar --deploy target/myapp.war
 - Puedes personalizar el mecanismo de autenticación implementando una clase que extienda `HttpAuthenticationMechanism`.
 
 Este ejemplo demuestra cómo integrar Jakarta Security con Jakarta Faces en Payara Micro, permitiendo autenticar usuarios y proteger recursos de manera eficiente.
+
+---
+
+Proteger páginas en una aplicación **Jakarta Faces (JSF)** utilizando **Jakarta Security** es un proceso que implica configurar roles y restringir el acceso a ciertas páginas o recursos. A continuación, te mostraré cómo proteger páginas específicas en una aplicación JSF utilizando anotaciones de seguridad y configuraciones adicionales.
+
+---
+
+### 1. **Configuración de Roles y Usuarios**
+
+Primero, asegúrate de tener definidos los usuarios y roles en tu servidor de aplicaciones (en este caso, Payara Micro). Puedes hacerlo mediante archivos de configuración como `users.properties` y `groups.properties`.
+
+#### Archivo `users.properties`:
+```properties
+user1=password123
+admin1=adminpass
+```
+
+#### Archivo `groups.properties`:
+```properties
+user1=USER
+admin1=ADMIN
+```
+
+Estos archivos definen dos usuarios: `user1` con el rol `USER` y `admin1` con el rol `ADMIN`.
+
+---
+
+### 2. **Protección de Páginas con Anotaciones**
+
+Puedes usar anotaciones como `@RolesAllowed` para proteger beans administrados que controlan las páginas JSF. Por ejemplo:
+
+#### Bean Administrado (`ProtectedBean.java`):
+```java
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
+
+@Named
+@RequestScoped
+public class ProtectedBean {
+
+    @RolesAllowed("USER")
+    public String getUserMessage() {
+        return "Bienvenido, usuario normal.";
+    }
+
+    @RolesAllowed("ADMIN")
+    public String getAdminMessage() {
+        return "Bienvenido, administrador.";
+    }
+}
+```
+
+En este ejemplo:
+- El método `getUserMessage()` solo puede ser accedido por usuarios con el rol `USER`.
+- El método `getAdminMessage()` solo puede ser accedido por usuarios con el rol `ADMIN`.
+
+---
+
+### 3. **Restringir Acceso a Páginas JSF**
+
+Para restringir el acceso a páginas completas, puedes usar la configuración del archivo `web.xml`. Esto permite bloquear el acceso a ciertas URLs basadas en roles.
+
+#### Configuración en `web.xml`:
+```xml
+<security-constraint>
+    <web-resource-collection>
+        <web-resource-name>Protected Pages</web-resource-name>
+        <url-pattern>/protected/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>USER</role-name>
+        <role-name>ADMIN</role-name>
+    </auth-constraint>
+</security-constraint>
+
+<login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+        <form-login-page>/login.xhtml</form-login-page>
+        <form-error-page>/login-error.xhtml</form-error-page>
+    </form-login-config>
+</login-config>
+
+<security-role>
+    <role-name>USER</role-name>
+</security-role>
+<security-role>
+    <role-name>ADMIN</role-name>
+</security-role>
+```
+
+En este ejemplo:
+- Todas las páginas bajo `/protected/*` están protegidas.
+- Solo los usuarios con los roles `USER` o `ADMIN` pueden acceder a estas páginas.
+- Si un usuario no está autenticado, será redirigido a `/login.xhtml`.
+- Si la autenticación falla, se mostrará `/login-error.xhtml`.
+
+---
+
+### 4. **Páginas JSF Protegidas**
+
+Crea las páginas JSF que estarán protegidas. Por ejemplo:
+
+#### `protected/home.xhtml`:
+```xml
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Página Protegida</title>
+</h:head>
+<h:body>
+    <h1>Bienvenido a la página protegida</h1>
+    <p>#{protectedBean.userMessage}</p>
+</h:body>
+</html>
+```
+
+#### `protected/admin.xhtml`:
+```xml
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Página de Administrador</title>
+</h:head>
+<h:body>
+    <h1>Página exclusiva para administradores</h1>
+    <p>#{protectedBean.adminMessage}</p>
+</h:body>
+</html>
+```
+
+---
+
+### 5. **Control de Acceso en Beans**
+
+Si necesitas verificar el rol del usuario directamente en un bean, puedes inyectar `SecurityContext`:
+
+```java
+import jakarta.security.enterprise.SecurityContext;
+import jakarta.inject.Inject;
+
+@Named
+@RequestScoped
+public class AccessControlBean {
+
+    @Inject
+    private SecurityContext securityContext;
+
+    public boolean isUserInRole(String role) {
+        return securityContext.isCallerInRole(role);
+    }
+}
+```
+
+Luego, puedes usar este bean en tus páginas JSF para mostrar contenido condicionalmente:
+
+```xml
+<h:panelGroup rendered="#{accessControlBean.isUserInRole('ADMIN')}">
+    <p>Contenido exclusivo para administradores.</p>
+</h:panelGroup>
+```
+
+---
+
+### 6. **Autenticación con Jakarta Security**
+
+Para manejar la autenticación, puedes usar un formulario de inicio de sesión como el siguiente:
+
+#### `login.xhtml`:
+```xml
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Iniciar Sesión</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:outputLabel for="username" value="Usuario:" />
+        <h:inputText id="username" value="#{authController.username}" required="true" />
+        <br />
+
+        <h:outputLabel for="password" value="Contraseña:" />
+        <h:inputSecret id="password" value="#{authController.password}" required="true" />
+        <br />
+
+        <h:commandButton value="Iniciar Sesión" action="#{authController.login}" />
+    </h:form>
+
+    <h:messages />
+</h:body>
+</html>
+```
+
+El `AuthController` maneja la lógica de autenticación, como se mostró en la respuesta anterior.
+
+---
+
+### 7. **Pruebas**
+
+1. Despliega la aplicación en Payara Micro.
+2. Intenta acceder a `/protected/home.xhtml` sin iniciar sesión. Deberías ser redirigido a `/login.xhtml`.
+3. Inicia sesión con un usuario válido:
+   - Con `user1` (rol `USER`), deberías poder acceder a `/protected/home.xhtml`.
+   - Con `admin1` (rol `ADMIN`), deberías poder acceder tanto a `/protected/home.xhtml` como a `/protected/admin.xhtml`.
+
+---
+
+### Resumen
+
+- Usa `@RolesAllowed` para proteger métodos en beans administrados.
+- Configura restricciones de acceso en `web.xml` para proteger páginas completas.
+- Implementa un formulario de inicio de sesión con Jakarta Security para autenticar usuarios.
+- Usa `SecurityContext` para verificar roles dinámicamente en beans.
+
+Este enfoque garantiza que las páginas JSF estén protegidas y que solo los usuarios autorizados puedan acceder a ellas.
