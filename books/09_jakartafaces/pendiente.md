@@ -1,11 +1,9 @@
-- [] componente imagen
-- [] componente login solo sepasa al controller
+- [x] componente imagen
+- [x] componente login solo sepasa al controller
 - [] logincompleto con roles
-
+- [] cambiar por <p:password>
 - [] Integrar Payaramicro
-- [] Descargar los css y js de tailwindcss
-- [] Crear el dashboard
-- [] Pasarlo a payara-micro:dev
+
 - [] Change Dark mode and White
 
 
