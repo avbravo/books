@@ -1,3 +1,9 @@
+
+- [] Pasar todos los li del dashboard a 
+ <yoss:submenuli  normalLabel="Login" collapsedLabel="L" href="index.xhtml"/>
+
+- [] Configurar el template
+
 - [x] componente imagen
 - [x] componente login solo sepasa al controller
 - [] logincompleto con roles
