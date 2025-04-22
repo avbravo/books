@@ -1,7 +1,7 @@
 
 Menu Records and Submenu
 estilo primefaces
-
+- [] pasarlo como un template
 - [] Agregar profile de Payaramicro
 - [] Soporte taildwin css desde webjar
 - [] Templates
