@@ -823,3 +823,350 @@ Creamos una vista básica en XHTML para interactuar con el controlador:
 ---
 
 Este ejemplo es modular y puede ampliarse según sea necesario. Si necesitas más detalles o ajustes, no dudes en preguntar.
+
+
+
+A continuación, te muestro cómo extender el ejemplo anterior para incluir operaciones CRUD (Crear, Leer, Actualizar, Eliminar) utilizando **Java Records** y una interfaz basada en **Jakarta Faces**. Este enfoque combina la simplicidad de los records con la potencia de Jakarta Faces para crear una aplicación web.
+
+---
+
+### **1. Dependencias Necesarias**
+
+Primero, asegúrate de que tu proyecto tenga las dependencias necesarias. Si usas Maven, añade lo siguiente a tu `pom.xml`:
+
+```xml
+<dependencies>
+    <!-- ArcadeDB -->
+    <dependency>
+        <groupId>com.arcadedb</groupId>
+        <artifactId>arcadedb-client</artifactId>
+        <version>23.9.0</version>
+    </dependency>
+
+    <!-- Jakarta Faces -->
+    <dependency>
+        <groupId>jakarta.faces</groupId>
+        <artifactId>jakarta.faces-api</artifactId>
+        <version>4.0.0</version>
+    </dependency>
+
+    <!-- Jakarta Servlets -->
+    <dependency>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+        <version>6.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+```
+
+---
+
+### **2. Estructura del Proyecto**
+
+Organiza tu proyecto de la siguiente manera:
+
+```
+src/main/java/
+    ├── com.example.arcadedb
+    │   ├── model/
+    │   │   ├── Persona.java
+    │   │   └── Perfil.java
+    │   ├── service/
+    │   │   └── PersonaService.java
+    │   └── controller/
+    │       └── PersonaController.java
+    └── resources/
+        └── META-INF/
+            └── faces-config.xml
+webapp/
+    └── WEB-INF/
+        └── web.xml
+    └── index.xhtml
+```
+
+---
+
+### **3. Código Fuente**
+
+#### **a. Modelos con Java Records**
+
+Define los modelos `Persona` y `Perfil` como registros inmutables.
+
+```java
+package com.example.arcadedb.model;
+
+public record Persona(String id, String nombre, int edad, Perfil perfil) {}
+
+public record Perfil(String id, String descripcion, String ocupacion) {}
+```
+
+---
+
+#### **b. Servicio CRUD**
+
+Implementa un servicio para manejar las operaciones CRUD con ArcadeDB.
+
+```java
+package com.example.arcadedb.service;
+
+import com.arcadedb.database.Database;
+import com.arcadedb.database.DatabaseFactory;
+import com.example.arcadedb.model.Persona;
+import com.example.arcadedb.model.Perfil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PersonaService {
+
+    private static final String DATABASE_PATH = "data/mydatabase";
+
+    public void crearPersona(Persona persona) {
+        try (Database database = new DatabaseFactory(DATABASE_PATH).open()) {
+            database.begin();
+            var perfilDoc = database.newDocument("Perfil")
+                    .set("descripcion", persona.perfil().descripcion())
+                    .set("ocupacion", persona.perfil().ocupacion())
+                    .save();
+
+            var personaDoc = database.newDocument("Persona")
+                    .set("nombre", persona.nombre())
+                    .set("edad", persona.edad())
+                    .set("perfil", perfilDoc)
+                    .save();
+
+            database.commit();
+        }
+    }
+
+    public List<Persona> obtenerPersonas() {
+        List<Persona> personas = new ArrayList<>();
+        try (Database database = new DatabaseFactory(DATABASE_PATH).open()) {
+            database.query("sql", "SELECT * FROM Persona").forEach(result -> {
+                var perfilDoc = result.getProperty("perfil");
+                var perfil = new Perfil(
+                        perfilDoc.getIdentity().toString(),
+                        perfilDoc.get("descripcion"),
+                        perfilDoc.get("ocupacion")
+                );
+                personas.add(new Persona(
+                        result.getIdentity().toString(),
+                        result.getProperty("nombre"),
+                        result.getProperty("edad"),
+                        perfil
+                ));
+            });
+        }
+        return personas;
+    }
+
+    public void actualizarPersona(Persona persona) {
+        try (Database database = new DatabaseFactory(DATABASE_PATH).open()) {
+            database.begin();
+            var personaDoc = database.lookupById(persona.id());
+            if (personaDoc != null) {
+                personaDoc.set("nombre", persona.nombre());
+                personaDoc.set("edad", persona.edad());
+                personaDoc.save();
+
+                var perfilDoc = personaDoc.getProperty("perfil");
+                perfilDoc.set("descripcion", persona.perfil().descripcion());
+                perfilDoc.set("ocupacion", persona.perfil().ocupacion());
+                perfilDoc.save();
+            }
+            database.commit();
+        }
+    }
+
+    public void eliminarPersona(String id) {
+        try (Database database = new DatabaseFactory(DATABASE_PATH).open()) {
+            database.begin();
+            var personaDoc = database.lookupById(id);
+            if (personaDoc != null) {
+                personaDoc.delete();
+            }
+            database.commit();
+        }
+    }
+}
+```
+
+---
+
+#### **c. Controlador Jakarta Faces**
+
+Crea un controlador para manejar las interacciones del usuario.
+
+```java
+package com.example.arcadedb.controller;
+
+import com.example.arcadedb.model.Persona;
+import com.example.arcadedb.model.Perfil;
+import com.example.arcadedb.service.PersonaService;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
+
+import java.io.Serializable;
+import java.util.List;
+
+@Named
+@ViewScoped
+public class PersonaController implements Serializable {
+
+    private final PersonaService personaService = new PersonaService();
+    private Persona personaSeleccionada;
+    private String nombre;
+    private int edad;
+    private String descripcion;
+    private String ocupacion;
+
+    public List<Persona> getPersonas() {
+        return personaService.obtenerPersonas();
+    }
+
+    public void crearPersona() {
+        var perfil = new Perfil(null, descripcion, ocupacion);
+        var persona = new Persona(null, nombre, edad, perfil);
+        personaService.crearPersona(persona);
+        limpiarCampos();
+    }
+
+    public void seleccionarPersona(Persona persona) {
+        this.personaSeleccionada = persona;
+        this.nombre = persona.nombre();
+        this.edad = persona.edad();
+        this.descripcion = persona.perfil().descripcion();
+        this.ocupacion = persona.perfil().ocupacion();
+    }
+
+    public void actualizarPersona() {
+        var perfil = new Perfil(personaSeleccionada.perfil().id(), descripcion, ocupacion);
+        var persona = new Persona(personaSeleccionada.id(), nombre, edad, perfil);
+        personaService.actualizarPersona(persona);
+        limpiarCampos();
+    }
+
+    public void eliminarPersona() {
+        personaService.eliminarPersona(personaSeleccionada.id());
+        limpiarCampos();
+    }
+
+    private void limpiarCampos() {
+        this.personaSeleccionada = null;
+        this.nombre = null;
+        this.edad = 0;
+        this.descripcion = null;
+        this.ocupacion = null;
+    }
+
+    // Getters y setters
+    public Persona getPersonaSeleccionada() {
+        return personaSeleccionada;
+    }
+
+    public void setPersonaSeleccionada(Persona personaSeleccionada) {
+        this.personaSeleccionada = personaSeleccionada;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(String ocupacion) {
+        this.ocupacion = ocupacion;
+    }
+}
+```
+
+---
+
+#### **d. Interfaz de Usuario (index.xhtml)**
+
+Crea una página XHTML para interactuar con el usuario.
+
+```xml
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Gestión de Personas</title>
+</h:head>
+<h:body>
+    <h1>Gestión de Personas</h1>
+
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Nombre:" />
+            <h:inputText value="#{personaController.nombre}" />
+
+            <h:outputLabel value="Edad:" />
+            <h:inputText value="#{personaController.edad}" />
+
+            <h:outputLabel value="Descripción del Perfil:" />
+            <h:inputText value="#{personaController.descripcion}" />
+
+            <h:outputLabel value="Ocupación:" />
+            <h:inputText value="#{personaController.ocupacion}" />
+        </h:panelGrid>
+
+        <h:commandButton value="Crear" action="#{personaController.crearPersona}" />
+        <h:commandButton value="Actualizar" action="#{personaController.actualizarPersona}" rendered="#{not empty personaController.personaSeleccionada}" />
+        <h:commandButton value="Eliminar" action="#{personaController.eliminarPersona}" rendered="#{not empty personaController.personaSeleccionada}" />
+    </h:form>
+
+    <h:dataTable value="#{personaController.personas}" var="persona">
+        <h:column>
+            <f:facet name="header">Nombre</f:facet>
+            #{persona.nombre}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Edad</f:facet>
+            #{persona.edad}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Perfil</f:facet>
+            #{persona.perfil.descripcion} - #{persona.perfil.ocupacion}
+        </h:column>
+        <h:column>
+            <h:commandButton value="Seleccionar" action="#{personaController.seleccionarPersona(persona)}" />
+        </h:column>
+    </h:dataTable>
+</h:body>
+</html>
+```
+
+---
+
+### **4. Explicación**
+
+- **Java Records**: Simplifican la definición de modelos inmutables.
+- **Servicio CRUD**: Centraliza las operaciones de base de datos.
+- **Controlador**: Actúa como intermediario entre la vista y el servicio.
+- **Interfaz de Usuario**: Permite al usuario interactuar con la aplicación mediante formularios y tablas.
+
+Si tienes dudas adicionales o necesitas ajustes, no dudes en preguntar.
