@@ -1324,3 +1324,201 @@ La solución consiste en utilizar un patrón de diseño donde los `record` perma
 - Facilitas la integración con frameworks como Jakarta Faces sin sacrificar las ventajas de los `record`.
 
 Si tienes más preguntas o necesitas ampliar algún aspecto, no dudes en comentarlo. ¡Buena suerte con tu proyecto!
+
+___
+A continuación, te muestro cómo usar **MapStruct** y **ModelMapper** para simplificar las conversiones entre un `DTO` mutable y un `record` inmutable en un proyecto Jakarta Faces. Ambas herramientas son populares para automatizar el mapeo de objetos, lo que reduce la cantidad de código boilerplate y minimiza errores manuales.
+
+---
+
+### **Ejemplo con MapStruct**
+
+#### **1. Dependencias**
+Primero, agrega la dependencia de MapStruct a tu archivo `pom.xml`:
+```xml
+<dependency>
+    <groupId>org.mapstruct</groupId>
+    <artifactId>mapstruct</artifactId>
+    <version>1.5.5.Final</version>
+</dependency>
+<dependency>
+    <groupId>org.mapstruct</groupId>
+    <artifactId>mapstruct-processor</artifactId>
+    <version>1.5.5.Final</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+#### **2. Definir el `record` inmutable**
+```java
+public record Producto(Long id, String nombre, double precio) {
+}
+```
+
+#### **3. Crear el DTO mutable**
+```java
+public class ProductoDTO {
+    private Long id;
+    private String nombre;
+    private double precio;
+
+    // Getters y setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+}
+```
+
+#### **4. Crear el Mapper con MapStruct**
+Define una interfaz para el mapeo automático:
+```java
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+@Mapper
+public interface ProductoMapper {
+    ProductoMapper INSTANCE = Mappers.getMapper(ProductoMapper.class);
+
+    Producto toProducto(ProductoDTO productoDTO);
+    ProductoDTO toProductoDTO(Producto producto);
+}
+```
+
+#### **5. Uso en el controlador**
+Aquí está el controlador que utiliza el mapper:
+```java
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
+
+@Named
+@ViewScoped
+public class ProductoController implements Serializable {
+    private ProductoDTO productoDTO = new ProductoDTO();
+    private List<Producto> productos = new ArrayList<>();
+
+    public void cargarProducto(Producto producto) {
+        this.productoDTO = ProductoMapper.INSTANCE.toProductoDTO(producto);
+    }
+
+    public void guardarProducto() {
+        Producto producto = ProductoMapper.INSTANCE.toProducto(productoDTO);
+        productos.add(producto); // Guardar en la lista (simulando persistencia)
+        productoDTO = new ProductoDTO(); // Limpiar el formulario
+    }
+
+    public ProductoDTO getProductoDTO() {
+        return productoDTO;
+    }
+
+    public void setProductoDTO(ProductoDTO productoDTO) {
+        this.productoDTO = productoDTO;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+}
+```
+
+---
+
+### **Ejemplo con ModelMapper**
+
+#### **1. Dependencias**
+Agrega la dependencia de ModelMapper a tu archivo `pom.xml`:
+```xml
+<dependency>
+    <groupId>org.modelmapper</groupId>
+    <artifactId>modelmapper</artifactId>
+    <version>3.1.1</version>
+</dependency>
+```
+
+#### **2. Definir el `record` inmutable y el DTO mutable**
+Usaremos las mismas clases `Producto` y `ProductoDTO` definidas anteriormente.
+
+#### **3. Configurar ModelMapper**
+Crea una clase utilitaria para configurar ModelMapper:
+```java
+import org.modelmapper.ModelMapper;
+
+public class MapperUtil {
+    private static final ModelMapper modelMapper = new ModelMapper();
+
+    public static <S, T> T map(S source, Class<T> targetClass) {
+        return modelMapper.map(source, targetClass);
+    }
+}
+```
+
+#### **4. Uso en el controlador**
+El controlador ahora utiliza ModelMapper para las conversiones:
+```java
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
+
+@Named
+@ViewScoped
+public class ProductoController implements Serializable {
+    private ProductoDTO productoDTO = new ProductoDTO();
+    private List<Producto> productos = new ArrayList<>();
+
+    public void cargarProducto(Producto producto) {
+        this.productoDTO = MapperUtil.map(producto, ProductoDTO.class);
+    }
+
+    public void guardarProducto() {
+        Producto producto = MapperUtil.map(productoDTO, Producto.class);
+        productos.add(producto); // Guardar en la lista (simulando persistencia)
+        productoDTO = new ProductoDTO(); // Limpiar el formulario
+    }
+
+    public ProductoDTO getProductoDTO() {
+        return productoDTO;
+    }
+
+    public void setProductoDTO(ProductoDTO productoDTO) {
+        this.productoDTO = productoDTO;
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+}
+```
+
+---
+
+### **Comparación: MapStruct vs ModelMapper**
+
+| Característica              | MapStruct                                      | ModelMapper                                  |
+|-----------------------------|------------------------------------------------|----------------------------------------------|
+| **Rendimiento**             | Más rápido (genera código en tiempo de compilación). | Más lento (usa reflexión en tiempo de ejecución). |
+| **Configuración**           | Requiere definir interfaces explícitas.       | Configuración más flexible y menos verbosa.  |
+| **Compatibilidad**          | Mejor para proyectos grandes y complejos.     | Ideal para proyectos pequeños o medianos.    |
+| **Curva de aprendizaje**    | Mayor debido a la necesidad de definir mappers. | Menor, ya que es más intuitivo.             |
+| **Flexibilidad**            | Menos flexible (requiere ajustes manuales).   | Más flexible (permite mapeos dinámicos).     |
+
+---
+
+### **Conclusión**
+Ambas herramientas son excelentes para simplificar las conversiones entre `DTO` y `record`. Si buscas rendimiento y tipado fuerte, **MapStruct** es la mejor opción. Si prefieres simplicidad y flexibilidad, **ModelMapper** puede ser más adecuado. Elige según las necesidades específicas de tu proyecto.
