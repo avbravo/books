@@ -411,3 +411,150 @@ Para ejecutar este código:
  * Guarda el código Java en un archivo llamado ArcadeDBPersonaPerfilCRUD.java.
  * Compila y ejecuta el código.
 Este ejemplo proporciona una base sólida para realizar operaciones CRUD en ArcadeDB con entidades relacionadas. Puedes adaptarlo y extenderlo según las necesidades específicas de tu aplicación.
+
+___
+
+A continuación, te muestro un ejemplo de cómo trabajar con **ArcadeDB** en Java utilizando dos tablas relacionadas: `Persona` y `Perfil`. En este caso, asumimos que cada `Persona` tiene un perfil asociado mediante una relación uno a uno.
+
+---
+
+### **Ejemplo de Código Java con ArcadeDB**
+
+#### **1. Dependencias necesarias**
+Antes de comenzar, asegúrate de incluir las dependencias de ArcadeDB en tu archivo `pom.xml` si estás utilizando Maven:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.arcadedb</groupId>
+        <artifactId>arcadedb-client</artifactId>
+        <version>23.9.0</version> <!-- Usa la versión más reciente -->
+    </dependency>
+</dependencies>
+```
+
+#### **2. Código Java**
+
+```java
+import com.arcadedb.database.Database;
+import com.arcadedb.database.DatabaseFactory;
+import com.arcadedb.database.MutableDocument;
+
+public class ArcadeDBExample {
+
+    public static void main(String[] args) {
+        // Ruta de la base de datos
+        String databasePath = "data/mydatabase";
+
+        // Crear o abrir la base de datos
+        try (Database database = new DatabaseFactory(databasePath).create()) {
+            // Crear esquemas para las tablas Persona y Perfil
+            if (!database.getSchema().existsType("Persona")) {
+                database.getSchema().createDocumentType("Persona");
+                database.getSchema().createProperty("Persona.nombre", String.class);
+                database.getSchema().createProperty("Persona.edad", Integer.class);
+                database.getSchema().createProperty("Persona.perfil", "Perfil"); // Relación con Perfil
+            }
+
+            if (!database.getSchema().existsType("Perfil")) {
+                database.getSchema().createDocumentType("Perfil");
+                database.getSchema().createProperty("Perfil.descripcion", String.class);
+                database.getSchema().createProperty("Perfil.ocupacion", String.class);
+            }
+
+            // Iniciar transacción
+            database.begin();
+
+            try {
+                // Crear un nuevo perfil
+                MutableDocument perfil = database.newDocument("Perfil");
+                perfil.set("descripcion", "Entusiasta de la tecnología");
+                perfil.set("ocupacion", "Ingeniero de software");
+                perfil.save(); // Guardar el perfil
+
+                // Crear una nueva persona
+                MutableDocument persona = database.newDocument("Persona");
+                persona.set("nombre", "Juan Pérez");
+                persona.set("edad", 30);
+                persona.set("perfil", perfil); // Asociar el perfil a la persona
+                persona.save(); // Guardar la persona
+
+                // Confirmar la transacción
+                database.commit();
+                System.out.println("Datos insertados correctamente.");
+            } catch (Exception e) {
+                // Revertir la transacción en caso de error
+                database.rollback();
+                System.err.println("Error al insertar datos: " + e.getMessage());
+            }
+
+            // Consultar datos
+            System.out.println("\nConsultando datos...");
+            database.query("sql", "SELECT * FROM Persona").forEach(result -> {
+                System.out.println("Nombre: " + result.getProperty("nombre"));
+                System.out.println("Edad: " + result.getProperty("edad"));
+
+                // Obtener el perfil asociado
+                MutableDocument perfilAsociado = result.getProperty("perfil");
+                if (perfilAsociado != null) {
+                    System.out.println("Perfil - Descripción: " + perfilAsociado.get("descripcion"));
+                    System.out.println("Perfil - Ocupación: " + perfilAsociado.get("ocupacion"));
+                }
+            });
+        }
+    }
+}
+```
+
+---
+
+### **Explicación del Código**
+
+1. **Creación de la Base de Datos**:
+   - Se utiliza `DatabaseFactory` para crear o abrir una base de datos en la ruta especificada (`data/mydatabase`).
+   - Si no existen los tipos `Persona` y `Perfil`, se crean utilizando el método `createDocumentType`.
+
+2. **Definición de Propiedades**:
+   - Para `Persona`, se definen las propiedades `nombre`, `edad` y `perfil`.
+   - Para `Perfil`, se definen las propiedades `descripcion` y `ocupacion`.
+   - La propiedad `perfil` en `Persona` es una relación hacia el tipo `Perfil`.
+
+3. **Inserción de Datos**:
+   - Se crea un documento de tipo `Perfil` y se guarda.
+   - Luego, se crea un documento de tipo `Persona` y se asocia el perfil previamente creado.
+   - Ambos documentos se guardan dentro de una transacción para garantizar la integridad de los datos.
+
+4. **Consulta de Datos**:
+   - Se utiliza una consulta SQL para recuperar todos los registros de la tabla `Persona`.
+   - Para cada registro, se accede al perfil asociado mediante la propiedad `perfil`.
+
+---
+
+### **Salida Esperada**
+
+Al ejecutar el programa, deberías ver una salida similar a la siguiente:
+
+```
+Datos insertados correctamente.
+
+Consultando datos...
+Nombre: Juan Pérez
+Edad: 30
+Perfil - Descripción: Entusiasta de la tecnología
+Perfil - Ocupación: Ingeniero de software
+```
+
+---
+
+### **Notas Importantes**
+
+1. **Relaciones**:
+   - En ArcadeDB, las relaciones entre documentos se manejan mediante referencias directas. En este caso, la propiedad `perfil` en `Persona` apunta al documento de tipo `Perfil`.
+
+2. **Transacciones**:
+   - Las transacciones son importantes para garantizar que los cambios se apliquen de manera atómica. Si algo falla durante la inserción, se realiza un rollback.
+
+3. **Escalabilidad**:
+   - Este ejemplo es básico pero puede escalarse para manejar relaciones más complejas, como uno a muchos o muchos a muchos.
+
+Si tienes dudas adicionales o necesitas un ejemplo más avanzado, no dudes en preguntar.
