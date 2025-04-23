@@ -6,6 +6,9 @@ estilo primefaces
 - [] Soporte taildwin css desde webjar
 - [] Templates
 - [] Tablero Kanban
+- [] ArcadeDB
+- [] record en jmoordbcore
+
 
 - [] Pasar todos los li del dashboard a 
  <yoss:submenuli  normalLabel="Login" collapsedLabel="L" href="index.xhtml"/>
