@@ -1,4 +1,15 @@
 
+Pasar los componentes del template a lña libreria jmoordbcoreui
+
+crear una pagina template.xhtml en WEB-INF.
+
+Alli pasasr los parametros a <jmoordcoreui:templatemaster
+menuleft =#{DashboardController.menuLeftComponent}"
+
+/>
+
+
+
 Menu Records and Submenu
 estilo primefaces
 - [] pasarlo como un template
