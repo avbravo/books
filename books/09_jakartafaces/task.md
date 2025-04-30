@@ -9,6 +9,66 @@ menuleft =#{DashboardController.menuLeftComponent}"
 />
 
 
+## en navheadertemplate
+
+``` 
+
+<div class="iq-header-img">
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header.png" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header1.png" alt="header" class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header2.png" alt="header" class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header3.png" alt="header" class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header4.png" alt="header" class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX"/>
+            <h:graphicImage library="jmoordbcoreui" name="images/dashboard/top-header5.png" alt="header" class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX"/>
+        </div>
+
+
+``` 
+
+**cambiarlo por**
+
+``` 
+<div class="iq-header-img">
+    <ui:repeat value="#{templateBean.imageInfo}" var="item">
+        <h:graphicImage library="#{item.library}" name="#{item.name}" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX"/>
+    </ui:repeat>
+   </div>
+
+``` 
+
+**Controller**
+
+```java
+public class Template {
+ private List<ImageInfo> navHeaderImageInfos;
+
+
+}
+
+@Named
+@SessionScoped
+public class DashboardFaces implements Serializable {
+
+    public String createTemplate() {
+template = new Template.Builder()
+           navHeaderImageInfos(Arrays.asList(
+             new ImageInfo.Builder().library("jmoordbcoreui").name("images/dashboard/top-header.png").build()
+
+           .new ImageInfo.Builder().library("jmoordbcoreui").name("images/dashboard/top-header1.png").build()
+           .new ImageInfo.Builder().library("jmoordbcoreui").name("images/dashboard/top-header2.png").build())
+.build()
+
+}
+
+}
+
+
+
+
+``
+
+
+
 
 Menu Records and Submenu
 estilo primefaces
