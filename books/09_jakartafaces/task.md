@@ -47,7 +47,7 @@ moveSubMenu.addItem("To trash", listener);
 
 menuBar.addItem("Duplicate", listener);
 
-``
+```
 
 ```
 
