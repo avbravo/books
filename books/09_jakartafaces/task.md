@@ -1,4 +1,8 @@
 
+- [ ] Crear componentes para el menu desplegable cambas
+
+
+
 Pasar los componentes del template a lña libreria jmoordbcoreui
 
 crear una pagina template.xhtml en WEB-INF.
