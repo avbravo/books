@@ -1,3 +1,34 @@
+menuitem
+ 
+ submenu
+ 
+ menu
+ validar iconos
+ 
+ <c:if test="${cc.attrs.footer.imageInfo.library eq 'primefaces'}">
+                                    <i class="#{cc.attrs.footer.imageInfo.name}"></i>  
+                                </c:if>
+                        <c:if test="${cc.attrs.footer.imageInfo.library ne 'primefaces'}">
+                            <h:graphicImage library="#{cc.attrs.footer.imageInfo.library}" name="#{cc.attrs.footer.imageInfo.name}" />
+                        </c:if>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
 
 - [ ] Crear componentes para el menu desplegable cambas
 
