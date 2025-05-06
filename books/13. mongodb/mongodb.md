@@ -640,3 +640,7 @@ via the command-line argument --bind_ip
 
 
 
+---
+# Guia Docker
+
+[https://www.mongodb.com/resources/products/compatibilities/docker](https://www.mongodb.com/resources/products/compatibilities/docker)
