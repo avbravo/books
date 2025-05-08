@@ -28,47 +28,6 @@ Alli pasasr los parametros a <jmoordcoreui:templatemaster
 menuleft =#{DashboardController.menuLeftComponent}"
 
 
-## Menu
-
-```java
-
-MenuBar menuBar = new MenuBar();
-menuBar.addThemeVariants(MenuBarVariant.LUMO_ICON);
-MenuItem share = createIconItem(menuBar, VaadinIcon.SHARE, "Share",
-        null);
-SubMenu shareSubMenu = share.getSubMenu();`
-
-
-MenuBarBasic.java
-Expand code
-,Copyto clipboard
-MenuBar menuBar = new MenuBar();
-Text selected = new Text("");
-ComponentEventListener<ClickEvent<MenuItem>> listener = e -> selected
-        .setText(e.getSource().getText());
-Div message = new Div(new Text("Clicked item: "), selected);
-
-menuBar.addItem("View", listener);
-menuBar.addItem("Edit", listener);
-
-MenuItem share = menuBar.addItem("Share");
-SubMenu shareSubMenu = share.getSubMenu();
-MenuItem onSocialMedia = shareSubMenu.addItem("On social media");
-SubMenu socialMediaSubMenu = onSocialMedia.getSubMenu();
-socialMediaSubMenu.addItem("Facebook", listener);
-socialMediaSubMenu.addItem("Twitter", listener);
-socialMediaSubMenu.addItem("Instagram", listener);
-shareSubMenu.addItem("By email", listener);
-shareSubMenu.addItem("Get Link", listener);
-
-MenuItem move = menuBar.addItem("Move");
-SubMenu moveSubMenu = move.getSubMenu();
-moveSubMenu.addItem("To folder", listener);
-moveSubMenu.addItem("To trash", listener);
-
-menuBar.addItem("Duplicate", listener);
-
-```
 
 ```
 
