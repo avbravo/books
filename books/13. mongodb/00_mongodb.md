@@ -1,6 +1,40 @@
 
-
 # MongoDB
+
+```shell
+
+sudo mkdir -p /data/db
+
+sudo chmod 777 /data/db
+
+sudo mkdir -p /var/log/mongodb
+
+```
+
+
+Instalar MongoDB Con credenciales
+```shell
+docker pull mongodb/mongodb-community-server:latest
+
+
+docker run --name mongodb -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=avbravo  -e MONGO_INITDB_ROOT_PASSWORD=denver16 mongodb/mongodb-community-server:latest  -v mongodb_data_container:/data/db 
+
+docker run --name mongodb-credenciales -d -p 27017:27017 -e MONGODB_INITDB_ROOT_USERNAME=avbravo  -e MONGODB_INITDB_ROOT_PASSWORD=denver16 mongodb/mongodb-community-server:8.0-ubi8  -v mongodb_data_container:/data/db 
+
+
+docker ps -a
+docker exec -it mongodb bash
+Autenticarse con usuario y password
+mongosh --username myusername --password mypassword
+show dbs
+
+docker stop mongodb
+docker rm mongodb
+
+```
+
+
+---
 
 
 # Historia
