@@ -1,3 +1,5 @@
+-[] Validar los roles en las paginas y configurar la seguridad en web.xml
+
 - [] Crear un arquetipo
 
 
