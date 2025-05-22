@@ -1,4 +1,9 @@
+- [] cerrar sesion index
+- [] cerrar sesion template usan metodos diferentes
+
 -[] Validar los roles en las paginas y configurar la seguridad en web.xml
+-[] Documentar security
+-[] Validar el tiempo de sesion
 
 - [] Crear un arquetipo
 
