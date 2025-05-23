@@ -1,3 +1,5 @@
+- [] Path de imagenes de logo y fondo en resources
+
 - [] identity store obtener el perfil seleccionado desde formulario login
 - [] validar la seguridad de acceso en base al perfil de usuario.
 - [] crear un <login: > <logincustomized>
