@@ -1,3 +1,28 @@
+- [] identity store obtener el perfil seleccionado desde formulario login
+- [] validar la seguridad de acceso en base al perfil de usuario.
+- [] crear un <login: > <logincustomized>
+- [] Crear formularios desde codigo java en tiempo de compilacion
+- [] Sesion Expirada no regrese al inde,cambiuar el icono
+- [] Cambiar imagen de session expired
+- [] actualizar cargo de con las paginas sesion expirada, template y login.
+```java
+@Page(controller="PersonaController")
+@PageCrud
+public Persona {
+@Hidden
+Long id;
+@InputText
+String name;
+@SelectOneMenu(converter="PaisConverter",action="",selection="")`
+Pais pais;
+
+}
+
+
+
+
+``
+
 - [] cerrar sesion index
 - [] cerrar sesion template usan metodos diferentes
 
