@@ -8,6 +8,8 @@
 - [] Crear formularios desde codigo java en tiempo de compilacion
 - [] actualizar cargo de con las paginas sesion expirada, template y login.
 - [] Generar paginas .xhtml en tiempo de compilacion con algo como.
+- [] Java record
+- [] RecordToDTO
 
 ```java
 @Page(controller="PersonaController")
