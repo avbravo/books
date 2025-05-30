@@ -1,6 +1,5 @@
-- [] pasar de yoss login a jmoordbcoreui
+
 - [] Probar la conexión desde el movil
-- [] pasar logginAnnotation de yoss a jmoordbcoreui y usar directamente el controller y atributos de loginFaces que se genera.
 - [] Actualizar el proyecto cargodev con los cambios de vencotapp
 - [] identity store obtener el perfil seleccionado desde formulario login
 - [] validar la seguridad de acceso en base al perfil de usuario.
@@ -141,3 +140,5 @@ agregar al header en WEB-INF/templates/common/admin.xhtml
 - [x] pasarlo como un template
 - [x] Agregar profile de Payaramicro
 - [x] Templates
+- [x] pasar de yoss login a jmoordbcoreui
+- [x] pasar logginAnnotation de yoss a jmoordbcorel contui y usar directamente eroller y atributos de loginFaces que se genera.
