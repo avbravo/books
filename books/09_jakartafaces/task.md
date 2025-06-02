@@ -1,14 +1,41 @@
 
+
+- [] corregir logomain para que use el logo oficial
+`+
+
+## Seguridad
+-[] Validar los roles en las paginas y configurar la seguridad en web.xml
+-[] Documentar security
+-[] Validar el tiempo de sesion
+
+
+---
+
+## General
+
+
 - [] Probar la conexión desde el movil
 - [] Actualizar el proyecto cargodev con los cambios de vencotapp
 - [] identity store obtener el perfil seleccionado desde formulario login
 - [] validar la seguridad de acceso en base al perfil de usuario.
-- [] crear un <login: > <logincustomized>
+
 - [] Crear formularios desde codigo java en tiempo de compilacion
 - [] actualizar cargo de con las paginas sesion expirada, template y login.
 - [] Generar paginas .xhtml en tiempo de compilacion con algo como.
+
+---
+
+## Java Record
+
+* Soporte para Record en el framework
+* Entity como Java Record
+* Crear una anotacion que genere DTO a partir de Java Record
 - [] Java record
 - [] RecordToDTO
+
+---
+## Controller
+*  Crear una anotacion que genere controller
 
 ```java
 @Page(controller="PersonaController")
@@ -41,9 +68,6 @@ public String search(){}
 ``
 
 
--[] Validar los roles en las paginas y configurar la seguridad en web.xml
--[] Documentar security
--[] Validar el tiempo de sesion
 
 - [] Crear un arquetipo
 
@@ -142,3 +166,4 @@ agregar al header en WEB-INF/templates/common/admin.xhtml
 - [x] Templates
 - [x] pasar de yoss login a jmoordbcoreui
 - [x] pasar logginAnnotation de yoss a jmoordbcorel contui y usar directamente eroller y atributos de loginFaces que se genera.
+- [x] crear un <login: > <logincustomized>
