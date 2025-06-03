@@ -49,3 +49,5 @@
 
 [Cloud Efficiency at Netflix](https://netflixtechblog.com/cloud-efficiency-at-netflix-f2a142955f83)
 
+
+[How Netflix Runs on Java?](https://blog.bytebytego.com/p/how-netflix-runs-on-java?utm_source=publication-search)
