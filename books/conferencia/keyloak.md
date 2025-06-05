@@ -1,0 +1,284 @@
+
+# 1.0 Keycloak
+
+[keycloak](https://www.keycloak.org/)
+
+
+
+
+## Instalar Keycloak
+
+Mediante docker. Especifique el puerto, en el ejemplo se usa el usuario admin, y password admin, y la versión de keyloak = 26.1.4
+
+```
+docker run -p 9190:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.1.4 start-dev
+
+```
+
+
+### Modos de ejecución
+
+* Desarrollador
+
+
+
+```shell
+   start-dev
+```
+
+* Building an optimized server runtime:
+```shell
+      build <OPTIONS>
+```
+
+  Start the server in production mode:
+```shell
+     start <OPTIONS>
+```
+
+
+### Consola de Administracion
+
+Ingrese a [http://localhost:9190/admin](http://localhost:9190/admin)
+
+![](resources/capitulo1/00_consola.png)
+
+
+Se muestra el dashboad
+
+![](resources/capitulo1/01_dashboard.png)
+
+
+Un dominio en Keycloak es equivalente a un inquilino. Cada dominio permite al administrador crear grupos aislados de aplicaciones y usuarios. Inicialmente, Keycloak incluye un único dominio, llamado maestro. Úselo solo para administrar Keycloak, no para administrar aplicaciones.
+
+Siga estos pasos para crear el primer dominio:
+
+Abra la Consola de administración de Keycloak.
+
+Haga clic en Keycloak junto al dominio maestro y luego en Crear dominio.
+
+![](resources/capitulo1/02_myrealname.png)
+
+
+Introduzca myrealm en el campo Nombre del dominio.
+
+Haga clic en Crear.
+
+
+
+![](resources/capitulo1/03_crear.png)
+
+Se muestra el realname creado
+
+![](resources/capitulo1/04_creado.png)
+
+
+## Crear usuario
+
+En el menu **User** de clic en Create New User
+
+![](resources/capitulo1/05_crearusuario.png)
+
+El unico requerido es el nombre de usuario, utilizamos **myUser**
+
+![](resources/capitulo1/06_creando.png)
+
+Presione el botón **Create**
+
+
+El sistema genera un ID
+
+Home:
+
+```
+baef511d-adb7-4ab2-bae8-aa17c2f008d9
+
+```
+
+Work:
+
+```
+b187228b-0906-4e5a-b657-569fd391bea8
+```
+![](resources/capitulo1/07_detalles.png)
+
+
+De clic en la pestaña credenciales para crear el password.
+
+
+![](resources/capitulo1/08_credenciales.png)
+
+De clic en **Set Password**
+
+
+Para este usuario creamos el password **denver16**
+
+![](resources/capitulo1/09_password.png)
+
+Presione el botón **Save**
+
+Luego nos pide que confirmemos el password
+
+![](resources/capitulo1/10_confirmar.png)
+
+Se muestra el listado de las credenciales
+
+![](resources/capitulo1/11_credenciales.png)
+
+En la pestana detalles actualizamos el nombre y apellido del usuario
+
+![](resources/capitulo1/12_details.png)
+
+## Verificar el usuario creado
+
+Ingrese a 
+
+[http://localhost:9190/realms/myrealm/account](http://localhost:9190/realms/myrealm/account)
+
+![](resources/capitulo1/13_login.png)
+
+_Ingresar con el
+
+```
+usuario: myuser
+
+password: denver16
+
+```
+
+Nos solicita cambiar el password por lo que usaremos **denver16A1**
+
+![](resources/capitulo1/14_cambiar.png)
+
+Nos solicita el correo
+
+![](resources/capitulo1/15_email.png)
+
+
+Nos muestra el usuario creado
+
+![](resources/capitulo1/16_usuario.png)
+
+
+---
+
+# Crear un cliente
+
+* Ingrese a la consola con el usuario **admin**
+* Asegurese que el realm seleccionado es **myrealm**
+
+De clic en Client
+
+![](resources/capitulo1/17_clientes.png)
+
+
+De clic en el botón **Create client**
+
+Ingrese los siguientes valores:
+
+```
+Client type: OpenID Connect
+
+Client ID: myclient
+
+```
+
+![](resources/capitulo1/18_creacion.png)
+
+
+Presione el boton siguiente y verifique que este seleccionado
+ 
+Client autenthification: **On** 
+
+Authentification Flow: **Standard flow**
+
+
+![](resources/capitulo1/19_standar.png)
+
+Presione el botón **Next**
+
+
+En Valid redirect URIs agregue: http://localhost:7987/*
+
+* Web origins: http://localhost:7987
+
+![](resources/capitulo1/20_setting.png)
+
+
+Se habilita la pestaña Credentials
+
+![](resources/capitulo1/21_credentials.png)
+
+Puede ver el Client Secret
+
+Home
+```
+
+Client Secret: cUwZoJ0mW1EtJ78jR5T66j2jsn6x8SxI
+
+
+
+```
+
+Work
+
+```
+
+Client Secret: gfXCrTap61O45MJcuTd1Q9JaYYC7RKeS
+
+
+```
+
+De clic en **Generate** para generar Token
+
+
+Home
+
+```
+Registration access token: eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjODMxY2Q1MS1mZTk2LTRkYmUtODg4Ni0yNjU1ZmFmNzEwNWUifQ.eyJleHAiOjAsImlhdCI6MTc0MzQ3MzU2NiwianRpIjoiMWIwNDE3MjYtYzlkYy00ODk3LThiZmItNjM1ZTkyYTRkYzllIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MTkwL3JlYWxtcy9teXJlYWxtIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo5MTkwL3JlYWxtcy9teXJlYWxtIiwidHlwIjoiUmVnaXN0cmF0aW9uQWNjZXNzVG9rZW4iLCJyZWdpc3RyYXRpb25fYXV0aCI6ImF1dGhlbnRpY2F0ZWQifQ.Vhe1Vbxf_dgpApKLbxigDVZ60iFFq14e9reTjHN74DqVm6UtSmG9HwJP7hDCImT5HFE4bb4J93D8EbJttz9Nsw
+
+```
+
+Work
+
+```
+Registration access token: eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4YjY2NTNlMC1hOTlhLTRlNDAtODNkOC00NjdmNDU2ZWM1MDgifQ.eyJleHAiOjAsImlhdCI6MTc0MzQzNzUzMSwianRpIjoiYjYzYzE2NWQtOGMyNi00NzM1LTg1ZGUtYmFiZTgxMmIzZjg4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MTkwL3JlYWxtcy9teXJlYWxtIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo5MTkwL3JlYWxtcy9teXJlYWxtIiwidHlwIjoiUmVnaXN0cmF0aW9uQWNjZXNzVG9rZW4iLCJyZWdpc3RyYXRpb25fYXV0aCI6ImF1dGhlbnRpY2F0ZWQifQ.i2nd49g9wblO0-RBhTpmacrxfm6K-FloIB-Y5U9rpJwvqfbAbQ96mHzQGE1imGERKSTjgujre3i8d4e-xGJm2A
+
+```
+
+Se muestra los datos de configuración
+
+![](resources/capitulo1/22_keygenerada.png)
+
+
+## Verificar la cuenta
+
+Ingrese desde el navegador
+
+[http://localhost:9190/realms/myrealm/account](http://localhost:9190/realms/myrealm/account)
+
+
+Se solicitara el usuario y password **myuser** y **denver16** respectivamente
+
+![](resources/capitulo1/23_prueba.png)
+---
+
+
+
+
+
+## Volver a ejecutar la imagen
+
+* Si la imagen fue detenida
+
+ejecute
+
+```shell
+
+docker ps -a
+
+docker start $ID_O_NOMBREIMAGEN
+
+```
+
+
