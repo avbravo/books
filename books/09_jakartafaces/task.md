@@ -1,6 +1,8 @@
 
 
 - [] corregir logomain para que use el logo oficial
+- [] Verificar el redireccionamiento del dashboard menu
+
 `+
 
 ## Seguridad
