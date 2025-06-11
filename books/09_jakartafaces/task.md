@@ -2,6 +2,8 @@
 - [] analizar payara-micro: 7 soporta jakartaee11 y mvc 3.0
 - [] Estudiar Java 21,22,23,24
 - [] Pasar a java Records
+- [] Microservicio con Helidon.io
+- [] Frontend Payara
 - [] corregir logomain para que use el logo oficial
 - [] Verificar el redireccionamiento del dashboard menu
 
