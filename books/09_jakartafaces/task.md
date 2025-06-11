@@ -1,3 +1,5 @@
+-  [] migrar a payara-micro: 6.2025.6 soporta java 24
+- [] analizar payara-micro: 7 soporta jakartaee11 y mvc 3.0
 
 
 - [] corregir logomain para que use el logo oficial
