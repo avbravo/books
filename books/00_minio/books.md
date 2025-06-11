@@ -499,3 +499,8 @@ python3 script.py
 ![](resources/minio.png)
 
 
+---
+
+# Java 
+
+[https://www.blackslate.io/articles/connect-to-minio-from-java](https://www.blackslate.io/articles/connect-to-minio-from-java)
