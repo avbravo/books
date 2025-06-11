@@ -7,7 +7,32 @@
 - [] corregir logomain para que use el logo oficial
 - [] Verificar el redireccionamiento del dashboard menu
 
-`+
+* Ver el usuario y password
+
+```java
+ Principal user = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getUserPrincipal();
+
+      
+ 
+       if( request.isUserInRole("DEVELOPERS")){
+           System.out.println("es developers");
+       }else{
+           System.out.println("no es developers");
+       }
+        
+                       
+        if (user != null)
+        {
+            System.out.println("Principal:::Logged in: " + user.getName() );
+
+        }
+        else
+        {
+        System.out.println( "Principal:::Not logged in");
+        }
+        System.out.println("==============================================");
+
+```
 
 ## Seguridad
 -[] Validar los roles en las paginas y configurar la seguridad en web.xml
