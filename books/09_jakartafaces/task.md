@@ -10,18 +10,10 @@
 * Ver el usuario y password
 
 ```java
- Principal user = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getUserPrincipal();
 
-      
- 
-       if( request.isUserInRole("DEVELOPERS")){
-           System.out.println("es developers");
-       }else{
-           System.out.println("no es developers");
-       }
-        
-                       
-        if (user != null)
+
+ Principal user = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getUserPrincipal();
+  if (user != null)
         {
             System.out.println("Principal:::Logged in: " + user.getName() );
 
@@ -30,7 +22,29 @@
         {
         System.out.println( "Principal:::Not logged in");
         }
+      
+
+   FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        request.isUserInRole("admin");
+ 
+       if( request.isUserInRole("DEVELOPERS")){
+           System.out.println("es developers");
+       }else{
+           System.out.println("no es developers");
+       }
+        
+                       
+      
         System.out.println("==============================================");
+
+
+     <f:view>
+         <h:form>
+             <!--  Content visible to users with the 'admin' role -->
+             <h:outputText value="Welcome, Admin!" rendered="#{request.isUserInRole('ROLEA')}"/>
+         </h:form>
+     </f:view>
 
 ```
 
