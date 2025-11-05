@@ -6,7 +6,7 @@
 - [] Frontend Payara
 - [] corregir logomain para que use el logo oficial
 - [] Verificar el redireccionamiento del dashboard menu
-
+- [] Instalar GraalVM 24
 * Ver el usuario y password
 
 ```java
