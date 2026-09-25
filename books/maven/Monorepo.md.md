@@ -1133,8 +1133,8 @@ git push origin master
 Crear y subir el Git Tag:
 
 ``` 
-git tag -a v1.0.0 -m "Release v1.0.0"
-git push origin v1.0.0
+git tag -a 1.0.0-SNAPSHOT -m "Release 1.0.0-SNAPSHOT"
+git push origin 1.0.0-SNAPSHOT
 ``` 
 
 ![](resource/04.png)
