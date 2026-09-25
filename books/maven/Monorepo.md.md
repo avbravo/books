@@ -99,6 +99,8 @@ Aquí tienes el archivo pom.xml ajustado y los pasos exactos para publicarlo y c
 1. Archivo pom.xml configurado como BOM
 Reemplaza tu archivo por el siguiente:
 
+
+
 ```
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -294,3 +296,505 @@ En el proyecto de ejemplo
 ```
 
 
+---
+
+## jettraframework
+
+* Crear el proyecto jettraframework
+* eliminar la carpeta src
+* en pom.xml cambiar la generacion de jar por bom
+* Crear las propiedades
+* Abrir el proyecto en NetBeans
+* Añadir los modulos
+
+![](resource/01.png)
+
+* Añadir la seccion  **<dependencyManagement>**
+
+
+Archivo **jettraframework/pom.xml**
+
+```xml
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.jettra</groupId>
+    <artifactId>jettraframeworks</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>jettraframeworks</name>
+    <url>http://maven.apache.org</url>
+    
+    <properties>
+        <maven.compiler.release>25</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Permite a JitPack o a proyectos hijos reutilizar la versión exacta -->
+        <jettra.version>${project.version}</jettra.version>
+
+    </properties>
+    
+    <modules>
+        <module>JettraAnnotation</module>
+        <module>JettraCDI</module>
+        <module>JettraEE</module>
+        <module>JettraFlux</module>
+        <module>JettraGRPC</module>
+        <module>JettraJSON</module>
+        <module>JettraJWT</module>
+        <module>JettraReport</module>
+        <module>JettraRest</module>
+        <module>JettraRules</module>
+        <module>JettraTest</module>
+    </modules>
+    <dependencies>
+    
+    </dependencies>
+    
+    <!-- Definición del BOM: centraliza versiones sin forzar la descarga de todas -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Módulos propios del ecosistema Jettra -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraAnnotation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraCDI</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraEE</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraFlux</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraGRPC</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraJSON</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraJWT</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraReport</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraRest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraRules</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>JettraTest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        
+
+   
+           
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <plugins>
+            <!-- Necesario para que JitPack instale y publique el código compilado de los módulos -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+```
+
+## Modificar el pom.xml de cada proyecto para que tome las propiedades del proyecto principal
+
+Por ejemplo **JettraCDI**, añada la secicon <parent> observe que se usa relativePath para obtener 
+la definición de propiedades del bom.
+
+```xml
+  <parent>
+        <groupId>io.jettra</groupId>
+        <artifactId>jettraframeworks</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <!-- 2. Identificador del Submódulo -->
+    <artifactId>JettraCDI</artifactId>
+    <packaging>jar</packaging>
+   <name>JettraCDI</name>
+    <description>Contenedor de Inyección de Dependencias (CDI) ultra-ligero y de alto rendimiento para el ecosistema Jettra, sin dependencias de Jakarta EE o Eclipse MicroProfile.</description>
+
+
+```
+
+En las dependencias, no utilice la version estas se toman del boom principal
+
+```xml
+ <dependencies>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraAnnotation</artifactId>
+            <!--<version>${jettra.annotation.version}</version>-->
+                 <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraJSON</artifactId>
+            <!--<version>${jettra.json.version}</version>-->
+            <scope>provided</scope>
+        </dependency>
+
+```
+
+Ejemplo completo
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+<!-- 1. Herencia del Proyecto Maestro -->
+    <parent>
+        <groupId>io.jettra</groupId>
+        <artifactId>jettraframeworks</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <!-- 2. Identificador del Submódulo -->
+    <artifactId>JettraCDI</artifactId>
+    <packaging>jar</packaging>
+   <name>JettraCDI</name>
+    <description>Contenedor de Inyección de Dependencias (CDI) ultra-ligero y de alto rendimiento para el ecosistema Jettra, sin dependencias de Jakarta EE o Eclipse MicroProfile.</description>
+
+    
+<!--    <groupId>io.jettra</groupId>
+    <artifactId>JettraCDI</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>JettraCDI</name>
+    <description>Contenedor de Inyección de Dependencias (CDI) ultra-ligero y de alto rendimiento para el ecosistema Jettra, sin dependencias de Jakarta EE o Eclipse MicroProfile.</description>-->
+
+<!--    <properties>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jettra.annotation.version>1.0.0-SNAPSHOT</jettra.annotation.version>
+        <jettra.json.version>1.0.0-SNAPSHOT</jettra.json.version>
+    </properties>-->
+
+    <dependencies>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraAnnotation</artifactId>
+            <!--<version>${jettra.annotation.version}</version>-->
+                 <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraJSON</artifactId>
+            <!--<version>${jettra.json.version}</version>-->
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+</project>
+
+```
+
+
+## Implementando el bom local en un proyecto cliente 
+
+En este caso usamos el proyecto JettraDB
+Configure el archivo pom.xml
+
+![](resource/02.png)
+
+Pasos:
+
+1. Añada **<dependencyManagement>**
+
+```xml
+  <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.jettra</groupId>
+                <artifactId>jettraframeworks</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+```
+
+2. Añada las dependencias no se especifican las versiones
+
+```xml
+ <dependency>
+    <groupId>io.jettra</groupId>
+    <artifactId>JettraJSON</artifactId>
+</dependency>
+<dependency>
+    <groupId>io.jettra</groupId>
+    <artifactId>JettraEE</artifactId>
+</dependency>
+
+```
+
+
+3. Archivo completo
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jettra</groupId>
+    <artifactId>JettraDB</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>JettraDB</name>
+
+    <properties>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <skipTests>true</skipTests>
+        <mainClass>com.jettra.store.engine.App</mainClass>
+        <exec.mainClass>com.jettra.store.engine.App</exec.mainClass>
+        <exec.executable>java</exec.executable>
+        <maven.compiler.compilerArgs>--enable-preview</maven.compiler.compilerArgs>
+    </properties>
+
+    <!-- 1. Importación del BOM local de JettraFrameworks -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.jettra</groupId>
+                <artifactId>jettraframeworks</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 2. Dependencias sin declarar <version> (las gestiona el BOM) -->
+    <dependencies>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraJSON</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraEE</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraCDI</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraRest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraJWT</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraFlux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraReport</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraRules</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraAnnotation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jettra</groupId>
+            <artifactId>JettraTest</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <compilerArgs>
+                        <arg>--enable-preview</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>io.jettra</groupId>
+                            <artifactId>JettraAnnotation</artifactId>
+                            <version>1.0.0-SNAPSHOT</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${mainClass}</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/jettra/discovered.classes</resource>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>${mainClass}</mainClass>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-Xms512m</argument>
+                                <argument>-Xmx4g</argument>
+                                <argument>-XX:+UseZGC</argument>
+                                <argument>-XX:+UseCompactObjectHeaders</argument>
+                                <argument>--enable-preview</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>${mainClass}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jettra-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>io.jettra.test.runner.JettraTestRunner</mainClass>
+                            <classpathScope>test</classpathScope>
+                            <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                            <arguments>
+                                <argument>${project.build.testOutputDirectory}</argument>
+                                <argument>${project.build.outputDirectory}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+```
