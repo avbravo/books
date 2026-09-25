@@ -1083,3 +1083,115 @@ install:
 En nuestro caso usaremos la segunda opción
 
 ![](resource/03.png)
+
+
+
+Crear el archivo gitignore
+
+``` 
+# Excluir la carpeta target de la raíz y de CUALQUIER submódulo en cualquier nivel de profundidad
+**/target/
+target/
+
+# Archivos de compilación individuales
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs de Maven
+mvn-error.log
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+
+# Configuraciones de IDEs y editores
+.idea/
+*.iml
+.vscode/
+nbproject/private/
+.project
+.classpath
+.settings/
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+``` 
+
+Subir los cambios al repositorio
+
+``` 
+cd ruta/a/jettraframeworks
+git add .
+git commit -m "feat: preparar BOM y jitpack.yml para release"
+git push origin master
+
+``` 
+
+Crear y subir el Git Tag:
+
+``` 
+git tag -a v1.0.0 -m "Release v1.0.0"
+git push origin v1.0.0
+``` 
+
+![](resource/04.png)
+
+
+Crear el Release formal en GitHub:
+
+Ve a tu repositorio en GitHub: 
+[https://github.com/TU_USUARIO_GITHUB/jettraframeworks](https://github.com/TU_USUARIO_GITHUB/jettraframeworks).
+
+En la columna derecha, haz clic en Releases y luego en Draft a new release.
+
+![](resource/05.png)
+
+En Choose a tag, selecciona el tag recién subido (v1.0.0).
+
+
+![](resource/06.png)
+
+Pon un título (por ejemplo, Release v1.0.0) y haz clic en **Publish release.**
+
+
+Construir el artefacto en JitPack:
+
+Entra a [https://jitpack.io](https://jitpack.io)
+
+Pega la URL del repo: TU_USUARIO_GITHUB/jettraframeworks y pulsa Look up.
+
+Verás la fila con la versión: **v1.0.0.**
+
+Pulsa el botón Get it.
+
+![](resource/07.png)
+
+JitPack ejecutará mvn clean install -DskipTests. 
+
+Espera a que el icono de estado cambie a verde. 
+Una vez completado, el BOM y todos los submódulos estarán listos para ser consumidos por JettraDB.
+
+
+![](resource/08.png)
+
+``` 
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+``` 
+
+
+``` 
+<dependency>
+    <groupId>com.github.jettraframework</groupId>
+    <artifactId>jettraframeworks</artifactId>
+    <version>v1.0.0</version>
+</dependency>
+
+``` 
