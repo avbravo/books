@@ -798,3 +798,288 @@ Pasos:
 </project>
 
 ```
+
+---
+
+## Ejemplo 2: JettraDB/pom.xml consumiendo el BOM desde JitPack
+
+Al usar JitPack en proyectos multimódulo:
+
+El BOM se descarga desde: com.github.TU_USUARIO_GITHUB:jettraframeworks:VERSION.
+
+Las dependencias individuales se resuelven bajo el espacio de nombres de submódulos de JitPack: com.github.TU_USUARIO_GITHUB.jettraframeworks:ARTIFACT_ID.
+
+(Sustituye TU_USUARIO_GITHUB por tu usuario u organización en GitHub, y v1.0.0 por el tag publicado).
+
+
+```  
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jettra</groupId>
+    <artifactId>JettraDB</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>JettraDB</name>
+
+    <properties>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <skipTests>true</skipTests>
+        <mainClass>com.jettra.store.engine.App</mainClass>
+        <exec.mainClass>com.jettra.store.engine.App</exec.mainClass>
+        <exec.executable>java</exec.executable>
+        <maven.compiler.compilerArgs>--enable-preview</maven.compiler.compilerArgs>
+        <jettra.version>v1.0.0</jettra.version>
+    </properties>
+
+    <!-- Repositorio de JitPack -->
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <!-- 1. Importación del BOM desde JitPack -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.TU_USUARIO_GITHUB</groupId>
+                <artifactId>jettraframeworks</artifactId>
+                <version>${jettra.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 2. Dependencias de los submódulos resueltos por JitPack -->
+    <dependencies>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraJSON</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraEE</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraCDI</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraRest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraJWT</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraFlux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraReport</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraRules</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraAnnotation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+            <artifactId>JettraTest</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <compilerArgs>
+                        <arg>--enable-preview</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.github.TU_USUARIO_GITHUB.jettraframeworks</groupId>
+                            <artifactId>JettraAnnotation</artifactId>
+                            <version>${jettra.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${mainClass}</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/jettra/discovered.classes</resource>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>${mainClass}</mainClass>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-Xms512m</argument>
+                                <argument>-Xmx4g</argument>
+                                <argument>-XX:+UseZGC</argument>
+                                <argument>-XX:+UseCompactObjectHeaders</argument>
+                                <argument>--enable-preview</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>${mainClass}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jettra-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>io.jettra.test.runner.JettraTestRunner</mainClass>
+                            <classpathScope>test</classpathScope>
+                            <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                            <arguments>
+                                <argument>${project.build.testOutputDirectory}</argument>
+                                <argument>${project.build.outputDirectory}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
+```
+
+
+---
+# Subir a Jitpack io
+
+Para usar jitpack.io tenemos que crear el archivo jitpack.yml
+
+Hay tres maneras de configurarlo.
+
+1. Estandar
+
+``` 
+jdk:
+  - openjdk25
+install:
+  - mvn clean install -DskipTests
+
+``` 
+
+2. Usando la imagen de bellsoft
+
+``` 
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y wget apt-transport-https gnupg
+  # Descargar e instalar Liberica JDK 25 de BellSoft
+  - wget -q https://download.bell-sw.com/java/25+37/bellsoft-jdk25+37-linux-amd64.deb -O liberica-jdk.deb || wget -q https://download.bell-sw.com/java/25/bellsoft-jdk25-linux-amd64.deb -O liberica-jdk.deb
+  - sudo dpkg -i liberica-jdk.deb || sudo apt-get install -f -y
+  # Establecer JAVA_HOME y actualizar alternativas
+  - export JAVA_HOME=$(ls -d /usr/lib/jvm/bellsoft-java25* 2>/dev/null || ls -d /usr/lib/jvm/*liberica* 2>/dev/null)
+  - export PATH=$JAVA_HOME/bin:$PATH
+  # Validar versión en el log de JitPack
+  - java -version
+
+install:
+  - mvn clean install -DskipTests
+``` 
+
+3. Instalando la ultima version de bellsoft
+
+``` 
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y wget apt-transport-https gnupg ca-certificates
+  # Agregar clave y repositorio oficial de BellSoft
+  - wget -qO - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/bellsoft.gpg
+  - echo "deb [arch=amd64] https://apt.bell-sw.com/ stable main" | sudo tee /etc/apt/sources.list.d/bellsoft.list
+  - sudo apt-get update -qq
+  # Instalar Liberica JDK 25
+  - sudo apt-get install -y bellsoft-java25
+  # Exportar variables de entorno
+  - export JAVA_HOME=/usr/lib/jvm/bellsoft-java25-amd64
+  - export PATH=$JAVA_HOME/bin:$PATH
+  - java -version
+
+install:
+  - mvn clean install -DskipTests
+
+``` 
+
+En nuestro caso usaremos la segunda opción
+
+![](resource/03.png)
