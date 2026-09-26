@@ -1195,3 +1195,8 @@ Una vez completado, el BOM y todos los submódulos estarán listos para ser cons
 </dependency>
 
 ``` 
+
+
+## Administrar los tag desde Netbeans
+
+![](resource/09.png)
