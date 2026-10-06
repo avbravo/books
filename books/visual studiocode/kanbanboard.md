@@ -22,3 +22,8 @@ Se guarda dentro de la carpeta
 
 Del Workspace
 en este caso lo guardo dentro de jettraexamplecontainers
+
+![](resources/01.png)
+
+Puedes cambiar la ruta
+![](resources/01.png)
