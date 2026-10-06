@@ -14,3 +14,11 @@ seleccionar
 Para ejecutarlo presione CTRL+SHIFT+P
 
 CTRL+ SHIFT+ P: Open Kanban Board
+
+
+Se guarda dentro de la carpeta
+
+.devtool/features/
+
+Del Workspace
+en este caso lo guardo dentro de jettraexamplecontainers
