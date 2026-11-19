@@ -52,6 +52,9 @@ De remoto a local:
 rsync -avzP desarrollador@192.168.60.246:/home/desarrollador/archivo.txt ./
 
 
-
-
 scp /home/avbravo/archivo.txt de@192.168.60.246:/home/desarrollador/
+
+
+# COPIAR NODO 4
+
+scp -r /home/avbravo/jettra-node-04 desarrollador@192.168.60.246:/home/desarrollador/jettra-node-04
