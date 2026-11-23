@@ -1,7 +1,5 @@
 # PROGRESO# Contexto y Objetivo
 
-En JettraStoreExplorer el formulario de login debe mostrarse centrado 
-y los dialogos deben mostrarse encima del formulario donde se invocan
 
 
 
