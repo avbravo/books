@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgresql
+      POSTGRES_DB: taller_cei
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ~/NetBeansProjects/jettrastack_local/books/postgresql/taller_cei.sql:/docker-entrypoint-initdb.d/taller_cei.sql
+
+volumes:
+  postgres_data:
