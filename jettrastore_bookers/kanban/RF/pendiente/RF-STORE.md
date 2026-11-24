@@ -2,14 +2,6 @@
 
 
 
-
-----
-
-
-
-
-
-
 Generar imagen docker
 
 [0] En JettraStore cuando se detiene el nodo PRIMARY envia a consola el mensaje [broadcastFrameWithQuorum] ⚡ Consenso Dinámico ajustado: 2 de 3 nodos configurados disponibles. Acks: 2/2 (quórum requerido: 2, resultado: true)
@@ -35,32 +27,6 @@ con la etiqueta HOST debe mostrar el IP con que este ejecutando el nodo.
 
 
 ---
-[1] Ejecutar docker-compose
-
-En JettraStoreShell 
-
-0. Documentar en JettraStore/guide/book.md
-  > Como crear ips virtuales para probar JettraStore local
-  > Como configurarlo y ejecutarlo
-
-1. Añadir los comandos agrupados por engine
-para hacer inserciones, eliminaciones, actualizaciones , consultas por unidad y registro.
-
-Por ejemplo
-Engine: DOCUMENT
-<comando para insertar>
-<comando para actualizar>
-<comando para consultar>
-<comando para eliminar>
-
-Engine: JAVA RECORD
-<comando para insertar>
-<comando para actualizar>
-<comando para consultar>
-<comando para eliminar>
-
-Añadirlo al comando help y documentarlo.
-
 
 3. En JettraSToreShell al presionar la flecha hacia arriba muestra el comando anterior y al presionar la flecha siguiente muestra el siguiente comando ejecutado.
 
@@ -68,13 +34,8 @@ Añadirlo al comando help y documentarlo.
 
 actualiza la documentacion de JettraStoreShell/guide/book.md
 
-5. Verifica que cree la base de datos en el cluster PRIMARY y hizo la distribucion al nodo SENCODARY
 
-6. Verificar que distribuya los registros.
 
-7. Probar con tres nodos deteniendo el PRIMARY y verificar que otro tome como primario, luego reiniciar el primario
-
-8. Crear el script para crear ips virtuales
 ---
 
     0. en JettraStorePolice3D Inicia con la configuracion de conexion debe Añadir los nodos con informacion de jettra.config
