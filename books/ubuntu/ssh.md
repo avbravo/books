@@ -31,8 +31,11 @@ Si quieres copiar una carpeta completa, agrega la bandera -r (recursivo):
 
 scp -r /home/avbravo/Descargas/jettra1 desarrollador@192.168.60.246:/home/desarrollador/jettra1
 
-    scp -r ~/jettra-node desarrollador@192.168.60.246:/home/desarrollador/jettra-node
+scp -r ~/jettra-node-05 desarrollador@192.168.60.246:/home/desarrollador/jettra-node-05
 
+
+scp -r ~/jettra-node-06 avbravo@192.168.60.198:/home/avbravo/jettra-node-06
+54nT4-4n4sh*
 . Copiar archivos del servidor remoto a tu equipo local
 Invierte el orden: coloca primero la ruta remota y al final la ruta de tu computador local (puedes usar . para indicar la carpeta actual donde estás parado).
 
